@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickFix | Financial Intelligence Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --sidebar-blue: #1d4ed8;
+      --deep-navy: #0f172a;
+      --body-bg: #f1f5f9;
+      --border-color: #e2e8f0;
+      --online-tag: #dbeafe;
+      --online-text: #1e40af;
+      --cash-tag: #ffedd5;
+      --cash-text: #9a3412;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--body-bg);
+      color: var(--deep-navy);
+      padding: 40px;
+      letter-spacing: -0.2px;
+    }
+
+    /* Top Actions */
+    .btn-back-hub {
+      background: #fff; border: 1px solid var(--border-color); padding: 12px 24px; border-radius: 16px;
+      font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      transition: 0.3s; color: var(--deep-navy); font-size: 14px;
+    }
+    .btn-back-hub:hover { background: var(--sidebar-blue); color: #fff; transform: translateX(-5px); box-shadow: 0 10px 20px rgba(29, 78, 216, 0.2); }
+
+    .btn-export-elite {
+      background: var(--deep-navy); color: white; border: none; padding: 12px 28px;
+      border-radius: 16px; font-weight: 800; font-size: 14px; transition: 0.3s;
+    }
+    .btn-export-elite:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3); }
+
+    /* Filter Panel */
+    .filter-panel-premium {
+      background: #fff; border-radius: 28px; padding: 25px; margin: 35px 0;
+      border: 1px solid var(--border-color); display: flex; gap: 20px; align-items: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+    }
+    .search-control { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 14px; padding: 12px 20px; flex: 1; font-size: 14px; font-weight: 600; outline: none; transition: 0.3s; }
+    .search-control:focus { border-color: var(--sidebar-blue); background: #fff; }
+
+    /* Elite Master Table */
+    .ledger-card-main {
+      background: #fff; border-radius: 35px; padding: 40px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.04); border: 1px solid var(--border-color);
+    }
+
+    .table thead th {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+      color: #94a3b8; border-bottom: 2px solid #f1f5f9; padding-bottom: 25px; font-weight: 800;
+    }
+
+    /* Identity Styling */
+    .id-pill { font-size: 10px; background: #f1f5f9; padding: 3px 8px; border-radius: 6px; color: #64748b; font-weight: 800; display: inline-block; }
+    .avatar-wrapper { width: 44px; height: 44px; border-radius: 14px; object-fit: cover; border: 2.5px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+    
+    /* Method Badges */
+    .method-badge {
+      padding: 6px 14px; border-radius: 100px; font-size: 10px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge-online { background: var(--online-tag); color: var(--online-text); }
+    .badge-cash { background: var(--cash-tag); color: var(--cash-text); }
+    
+    .amount-bold { font-weight: 800; font-size: 14px; color: var(--deep-navy); }
+    .admin-cut-red { color: #e11d48; font-weight: 800; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+      <a href="admin-dashboard.html" class="btn-back-hub">
+        <i class="fa-solid fa-chevron-left"></i> Dashboard Hub
+      </a>
+      <button class="btn-export-elite"><i class="fa-solid fa-download me-2"></i> Download Full Statement</button>
+    </div>
+
+    <div class="mt-4">
+      <h2 class="fw-800 m-0" style="color: var(--sidebar-blue);">Transaction Intelligence</h2>
+      <p class="text-muted fw-600">Complete auditing of all platform revenue, services, and settlements.</p>
+    </div>
+
+    <div class="filter-panel-premium">
+      <div class="flex-grow-1 position-relative">
+        <i class="fa-solid fa-magnifying-glass position-absolute text-muted" style="top: 17px; left: 20px;"></i>
+        <input type="text" class="search-control ps-5" placeholder="Search by TXN, Client, Worker or Service...">
+      </div>
+      <select class="search-control" style="max-width: 180px;">
+        <option>All Payments</option>
+        <option>Gateway Payments</option>
+        <option>Cash Collections</option>
+      </select>
+    </div>
+
+    <div class="ledger-card-main">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th class="ps-0">Transaction ID</th>
+              <th>Customer</th>
+              <th>Service Partner</th>
+              <th>Service Title</th>
+              <th>Total Bill</th>
+              <th>Method</th>
+              <th>Admin Cut (20%)</th>
+              <th class="text-end pe-0">Date & Time</th>
+            </tr>
+          </thead>
+          <tbody class="fw-600">
+            <tr>
+              <td class="ps-0"><span class="id-pill">#QX-1029</span></td>
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  <img src="https://i.pravatar.cc/150?u=c1" class="avatar-wrapper">
+                  <div><div class="small fw-800">Aryan Sharma</div><span class="id-pill">ID: C-201</span></div>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  <img src="https://i.pravatar.cc/150?u=w1" class="avatar-wrapper">
+                  <div><div class="small fw-800">Mohit Sharma</div><span class="id-pill">ID: W-882</span></div>
+                </div>
+              </td>
+              <td><span class="text-muted small">Kitchen Deep Clean</span></td>
+              <td class="amount-bold">₹2,800.00</td>
+              <td><span class="method-badge badge-online"><i class="fa-solid fa-bolt-lightning me-1"></i> UPI</span></td>
+              <td class="admin-cut-red">₹560.00</td>
+              <td class="text-end pe-0 text-muted small">30 Dec, 10:45 PM</td>
+            </tr>
+            <tr>
+              <td class="ps-0"><span class="id-pill">#QX-1030</span></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=c2" class="avatar-wrapper"><div><div class="small fw-800">Sneha Rao</div><span class="id-pill">ID: C-115</span></div></div></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=w2" class="avatar-wrapper"><div><div class="small fw-800">Vikram Yadav</div><span class="id-pill">ID: W-774</span></div></div></td>
+              <td><span class="text-muted small">Plumbing Leakage</span></td>
+              <td class="amount-bold">₹1,200.00</td>
+              <td><span class="method-badge badge-cash"><i class="fa-solid fa-hand-holding-dollar me-1"></i> Cash</span></td>
+              <td class="admin-cut-red">₹240.00</td>
+              <td class="text-end pe-0 text-muted small">30 Dec, 09:30 PM</td>
+            </tr>
+            <tr>
+              <td class="ps-0"><span class="id-pill">#QX-1031</span></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=c3" class="avatar-wrapper"><div><div class="small fw-800">Rahul Verma</div></div></div></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=w3" class="avatar-wrapper"><div><div class="small fw-800">Sanjeev Kumar</div></div></div></td>
+              <td><span class="text-muted small">AC Servicing</span></td>
+              <td class="amount-bold">₹1,500.00</td>
+              <td><span class="method-badge badge-online">UPI</span></td>
+              <td class="admin-cut-red">₹300.00</td>
+              <td class="text-end pe-0 text-muted small">30 Dec, 08:15 PM</td>
+            </tr>
+            <tr>
+              <td class="ps-0"><span class="id-pill">#QX-1032</span></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=c4" class="avatar-wrapper"><div><div class="small fw-800">Priya Singh</div></div></div></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=w4" class="avatar-wrapper"><div><div class="small fw-800">Amit Shah</div></div></div></td>
+              <td><span class="text-muted small">Electrician</span></td>
+              <td class="amount-bold">₹450.00</td>
+              <td><span class="method-badge badge-cash">Cash</span></td>
+              <td class="admin-cut-red">₹90.00</td>
+              <td class="text-end pe-0 text-muted small">30 Dec, 06:20 PM</td>
+            </tr>
+            <tr>
+              <td class="ps-0"><span class="id-pill">#QX-1033</span></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=c5" class="avatar-wrapper"><div><div class="small fw-800">Karan Mehra</div></div></div></td>
+              <td><div class="d-flex align-items-center gap-3"><img src="https://i.pravatar.cc/150?u=w5" class="avatar-wrapper"><div><div class="small fw-800">Arjun Verma</div></div></div></td>
+              <td><span class="text-muted small">Home Painting</span></td>
+              <td class="amount-bold">₹12,400.00</td>
+              <td><span class="method-badge badge-online">UPI</span></td>
+              <td class="admin-cut-red">₹2,480.00</td>
+              <td class="text-end pe-0 text-muted small">30 Dec, 04:10 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

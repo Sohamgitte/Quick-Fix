@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuickFix Pro | Elite Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Allura&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #0f172a 0%, #1e4ed8 100%);
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Background Shapes (Matching Registration) */
+    .bg-shape { position: fixed; z-index: -1; filter: blur(80px); opacity: 0.3; }
+    .shape-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: #1e4ed8; border-radius: 50%; }
+    .shape-2 { bottom: -10%; right: -10%; width: 400px; height: 400px; background: #0f172a; border-radius: 50%; }
+
+    /* Navbar (Matching Registration) */
+    .navbar-custom {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 15px 0;
+      position: sticky;
+      top: 0; z-index: 1000;
+    }
+    .navbar-brand { font-weight: 800; font-size: 1.5rem; color: var(--text-dark); letter-spacing: -1px; }
+    .tagline { font-family: 'Allura', cursive; font-size: 24px; color: var(--accent-blue); margin-left: 15px; }
+
+    /* Layout (Matching Registration) */
+    .registration-wrapper { margin-top: 40px; margin-bottom: 40px; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
+    .elite-card { background: #ffffff; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 1000px; width: 100%; display: flex; border: 1px solid rgba(255,255,255,0.5); }
+
+    .info-side { background: var(--primary-gradient); padding: 50px; width: 40%; color: white; display: flex; flex-direction: column; justify-content: center; }
+    .info-side h1 { font-weight: 800; font-size: 2.5rem; margin-bottom: 20px; }
+    
+    .form-side { padding: 50px; width: 60%; background: #fff; position: relative; }
+    .form-side h2 { font-weight: 700; color: var(--text-dark); margin-bottom: 8px; font-size: 1.8rem; }
+
+    /* Stepper Dots (Extra Elite Touch) */
+    .stepper-dots { display: flex; gap: 8px; margin-bottom: 25px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; transition: 0.3s; }
+    .dot.active { background: var(--accent-blue); width: 24px; border-radius: 10px; }
+
+    /* Inputs (Matching Registration) */
+    .form-label { font-weight: 600; font-size: 0.85rem; color: var(--text-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .form-label i { color: var(--accent-blue); }
+    .form-control { padding: 12px 16px; border-radius: 12px; border: 1.5px solid #e2e8f0; background: #f8fafc; transition: 0.3s; font-weight: 600; }
+    .form-control:focus { background: #fff; border-color: var(--accent-blue); box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); outline: none; }
+
+    .btn-submit { background: var(--primary-gradient); color: white; border: none; padding: 14px; font-weight: 700; border-radius: 12px; transition: 0.3s; margin-top: 10px; width: 100%; }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(15, 23, 42, 0.3); color: white; }
+
+    /* Section Visibility */
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 991px) { .info-side { display: none; } .form-side { width: 100%; padding: 35px; } .elite-card { max-width: 500px; margin: 0 15px; } }
+  </style>
+</head>
+<body>
+
+<div class="bg-shape shape-1"></div>
+<div class="bg-shape shape-2"></div>
+
+<nav class="navbar navbar-custom">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fas fa-screwdriver-wrench text-primary"></i> QuickFix.</a>
+    <span class="tagline d-none d-md-block">where expertise meets identity</span>
+    <div class="ms-auto">
+      <a href="worker.html" class="btn btn-link text-dark text-decoration-none fw-bold me-3"><i class="fas fa-chevron-left me-1"></i> Back</a>
+      <a href="#" class="btn btn-outline-dark rounded-pill px-4 fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#workerHelpModal">Help</a>
+    </div>
+  </div>
+</nav>
+
+<div class="registration-wrapper">
+  <div class="elite-card">
+    <div class="info-side">
+      <h1>Identity Terminal.</h1>
+      <p>Your security is our priority. Verify your legal credentials to unlock high-priority service requests in your city.</p>
+      <div class="mt-4">
+        <div class="d-flex align-items-center mb-3"><i class="fas fa-shield-check me-3"></i> <span>UIDAI Encrypted Sync</span></div>
+        <div class="d-flex align-items-center mb-3"><i class="fas fa-fingerprint me-3"></i> <span>256-bit Secure Layer</span></div>
+        <div class="d-flex align-items-center"><i class="fas fa-user-lock me-3"></i> <span>Privacy Guaranteed</span></div>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="stepper-dots">
+        <div class="dot active" id="dot1"></div>
+        <div class="dot" id="dot2"></div>
+        <div class="dot" id="dot3"></div>
+      </div>
+
+      <div class="section active" id="sec1">
+        <h2>Aadhaar Verification</h2>
+        <p class="text-muted small mb-4">Please enter your 12-digit Aadhaar number for real-time KYC.</p>
+        <div class="mb-4">
+            <label class="form-label"><i class="fas fa-id-card"></i> Aadhaar Number</label>
+            <input type="text" class="form-control" id="aadhaarNum" placeholder="0000 0000 0000" maxlength="14" required />
+        </div>
+        <button class="btn-submit" onclick="nextStep(2)">Proceed to OTP</button>
+      </div>
+
+      <div class="section" id="sec2">
+        <h2>Verify OTP</h2>
+        <p class="text-muted small mb-4">Enter the code sent to your Aadhaar-linked mobile.</p>
+        <div class="d-flex gap-2 mb-4 justify-content-center">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+            <input type="text" class="form-control text-center p-0 otp-box" style="width: 45px; height: 50px;" maxlength="1">
+        </div>
+        <button class="btn-submit" onclick="nextStep(3)">Confirm Verification</button>
+      </div>
+
+      <div class="section text-center" id="sec3">
+        <div class="mb-4 mt-3">
+            <i class="fas fa-circle-check fa-6x text-success"></i>
+        </div>
+        <h2>Profile Validated!</h2>
+        <p class="text-muted small mb-4">Verification complete. You are now authorized to accept professional jobs.</p>
+        <a href="worker-home.html" class="btn-submit d-block text-decoration-none">Go to Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="workerHelpModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 rounded-4 shadow-lg">
+      <div class="modal-header bg-dark text-white rounded-top-4">
+        <h5 class="modal-title fw-bold"><i class="fas fa-circle-question me-2"></i>Verification Help</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <h6 class="fw-bold">Getting Trouble?</h6>
+        <ul class="small text-muted mt-3">
+          <li>Ensure your Aadhaar is linked with an active mobile.</li>
+          <li>OTP is valid for only 10 minutes.</li>
+          <li>In case of failure, try again after 24 hours.</li>
+        </ul>
+        <hr>
+        <p class="mb-0 small">Support: <a href="mailto:pro@quickfix.com">pro@quickfix.com</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Aadhaar Space Logic
+    document.getElementById('aadhaarNum').addEventListener('input', function (e) {
+      let v = e.target.value.replace(/\D/g, '');
+      if (v.length > 12) v = v.slice(0, 12);
+      let m = v.match(/.{1,4}/g);
+      e.target.value = m ? m.join(' ') : v;
+    });
+
+    // Multi-step Logic
+    function nextStep(s) {
+        document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById('sec' + s).classList.add('active');
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            if (i+1 === s) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    // OTP Boxes Auto-focus
+    const boxes = document.querySelectorAll('.otp-box');
+    boxes.forEach((box, i) => {
+        box.addEventListener('keyup', (e) => {
+            if (e.target.value.length === 1 && i < boxes.length - 1) boxes[i+1].focus();
+            if (e.key === "Backspace" && i > 0) boxes[i-1].focus();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Dashboard - QuickFix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- External CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-color: #f4f9ff;
+      --card-bg: #ffffffcc;
+      --text-color: #000;
+      --nav-bg: #0d6efd;
+      --nav-link: #fff;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #f1f1f1;
+      --nav-bg: #1c1c1c;
+      --nav-link: #f1f1f1;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+    }
+
+    /* 🔵 NAVBAR POLISHED */
+.navbar {
+  background: var(--nav-bg);
+  padding: 0rem 1.2rem;
+  height: 80px; /* 👈 ultra slim height */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: var(--nav-link) !important;
+  font-size: 1.45rem;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand i {
+  font-size: 1.2rem;
+  margin-right: 6px;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 25px; /* 👈 increased button spacing */
+}
+
+.nav-link {
+  color: var(--nav-link) !important;
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0.4rem 0.2rem;
+}
+
+
+    .nav-link.text-danger {
+      color: #ff4d4d !important;
+    }
+
+    .dropdown-toggle {
+      color: var(--nav-link) !important;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .container {
+      padding: 50px 15px;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    .welcome {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 16px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      color: var(--text-color);
+    }
+
+    .card-title {
+      font-weight: 600;
+    }
+
+    .status-badge {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    .status-pending {
+      background: #fce7f3;
+      color: #be185d;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: url('https://cdn-icons-png.flaticon.com/512/149/149071.png') center/cover no-repeat;
+      margin: 0 auto 1rem;
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 10px 0;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-call {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+    .btn-msg {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    /* ⬇ Blue color for dashboard tabs */
+    .nav-tabs .nav-link {
+      color: #0d6efd !important;
+      font-weight: 600;
+    }
+
+    .nav-tabs .nav-link.active {
+      border-color: #0d6efd #0d6efd #fff;
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        padding: 30px 10px;
+      }
+
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+ <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand text-primary fs-3 fw-bold" href="#"><i class="fas fa-wrench me-1"></i>QuickFix</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link active" href="customer-home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="customer-profile.html">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="customer-payments.html">Payments</a></li>
+          <li class="nav-item"><a class="nav-link" href="booking-history.html">Bookings</a></li>
+          <li class="nav-item"><a class="nav-link text-danger" href="index.html">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Dashboard -->
+  <div class="container">
+    <h1>Current Bookings</h1>
+    <p class="welcome">Welcome back, <strong id="customer-name">Loading...</strong></p>
+
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <button class="nav-link active">Current Booking</button>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="booking-history.html">Booking History</a>
+      </li>
+    </ul>
+
+    <div class="row mt-4">
+      <!-- Booking Info -->
+      <div class="col-lg-7 mb-4">
+        <div class="card p-4">
+          <h5 class="card-title">Current Booking</h5>
+          <p><strong>Booking ID:</strong> <span id="booking-id">Loading...</span></p>
+          <span class="status-badge status-pending" id="booking-status">Pending</span>
+          <p><strong>Service Request:</strong> <span id="service-request">Loading...</span></p>
+          <p><strong>Service Address:</strong> <span id="service-address">Loading...</span></p>
+          <p><strong>Preferred Date:</strong> <span id="preferred-date">Loading...</span></p>
+          <p><strong>Preferred Time:</strong> <span id="preferred-time">Loading...</span></p>
+        </div>
+      </div>
+
+      <!-- Worker Info -->
+      <div class="col-lg-5">
+        <div class="card p-4 text-center">
+          <div class="avatar"></div>
+          <h5 id="worker-name">Not Assigned</h5>
+          <button class="btn action-btn btn-call mb-2" disabled>
+            <i class="fas fa-phone me-1"></i> Call Worker
+          </button>
+          <button class="btn action-btn btn-msg" disabled>
+            <i class="fas fa-comment-dots me-1"></i> Send Message
+          </button>
+        </div>
+        <!-- Arrived / Verify OTP Button Center -->
+  <div class="text-center my-4">
+    <button class="btn btn-primary btn-lg px-4"
+            data-bs-toggle="modal"
+            data-bs-target="#otpModal">
+      <i class="fas fa-check-circle me-2"></i> Verify OTP
+    </button>
+  </div>
+
+  </button>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- OTP Modal -->
+<div class="modal fade" id="otpModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+      
+      <!-- Header -->
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="fas fa-key me-2"></i> OTP Verification</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body text-center">
+        <p class="text-muted">Enter the OTP shared by the worker to confirm arrival.</p>
+
+        <input type="text" id="customer-otp"
+               class="form-control form-control-lg rounded-3 shadow-sm text-center mb-3"
+               placeholder="Enter 6-digit OTP" maxlength="6">
+
+        <div id="otp-status" class="mt-2 fw-semibold"></div>
+
+        <!-- ✅ Verify Button in center -->
+        <button class="btn btn-primary rounded-3 px-4 mt-3" onclick="verifyOTP()">Verify OTP</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
+
+    // Fetch Latest Booking
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('http://localhost:3000/latest-booking');
+        const booking = await res.json();
+
+        if (!booking) {
+          document.querySelector("#booking-id").textContent = "No booking found";
+          return;
+        }
+
+        document.querySelector("#customer-name").textContent = booking.name || "Customer";
+        document.querySelector("#booking-id").textContent = `BK-${booking.id}`;
+        document.querySelector("#service-request").textContent = booking.service;
+        document.querySelector("#service-address").textContent = booking.address;
+        document.querySelector("#preferred-date").textContent = booking.preferred_date;
+        document.querySelector("#preferred-time").textContent = booking.preferred_time;
+
+      } catch (err) {
+        console.error("Error fetching latest booking:", err);
+      }
+    });
+  </script>
+  <script>
+  let workerOtps = { "BK-1023": 123456 };
+
+  function verifyOTP() {
+    const bookingId = "BK-1023"; // example booking ID
+    const enteredOtp = document.getElementById("customer-otp").value.trim();
+    const statusEl = document.getElementById("otp-status");
+
+    if (!enteredOtp) {
+      statusEl.innerHTML = <span class="badge bg-warning text-dark p-2">⚠ Please enter OTP</span>;
+      return;
+    }
+
+    if (workerOtps[bookingId] && enteredOtp == workerOtps[bookingId]) {
+      statusEl.innerHTML = <span class="badge bg-success p-2">✅ OTP Verified! Worker has arrived.</span>;
+    } else {
+      statusEl.innerHTML = <span class="badge bg-danger p-2">❌ Invalid OTP. Try again.</span>;
+    }
+  }
+</script>
+
+
+
+</body>
+</html>

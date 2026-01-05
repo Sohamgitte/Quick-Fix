@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Audit Terminal | QuickFix Security</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand: #1d4ed8; --danger: #dc2626; --success: #16a34a;
+    }
+
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0f172a; color: white; margin: 0; }
+
+    /* Dark Inspection Layout */
+    .inspection-header {
+      background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px);
+      padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky; top: 0; z-index: 100;
+    }
+
+    .main-grid { display: grid; grid-template-columns: 400px 1fr; height: calc(100vh - 85px); }
+
+    /* Sidebar Details */
+    .audit-sidebar {
+      padding: 40px; background: #1e293b; border-right: 1px solid rgba(255,255,255,0.05);
+      overflow-y: auto;
+    }
+
+    /* Document Desk */
+    .document-desk { padding: 40px; background: #0f172a; overflow-y: auto; text-align: center; }
+
+    .doc-viewer {
+      background: #1e293b; border-radius: 24px; padding: 15px;
+      border: 2px solid rgba(255,255,255,0.05); position: relative;
+      transition: 0.3s; margin-bottom: 30px;
+    }
+    .doc-viewer:hover { border-color: var(--brand); }
+    .doc-viewer img { width: 100%; border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+
+    .label-audit { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .val-audit { font-size: 16px; font-weight: 700; color: white; margin-bottom: 25px; }
+
+    /* Action Buttons */
+    .action-footer {
+        position: fixed; bottom: 30px; left: 40px; right: 40px;
+        background: rgba(255,255,255,0.1); backdrop-filter: blur(20px);
+        padding: 20px 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);
+        display: flex; justify-content: space-between; align-items: center;
+        width: 320px; /* Aligned with sidebar */
+    }
+
+    .btn-approve { background: var(--success); color: white; border: none; padding: 14px 30px; border-radius: 14px; font-weight: 800; width: 100%; margin-bottom: 15px; }
+    .btn-reject { background: rgba(220, 38, 38, 0.15); color: #f87171; border: 2px solid #ef4444; padding: 14px 30px; border-radius: 14px; font-weight: 800; width: 100%; }
+
+    .btn-approve:hover { background: #15803d; transform: scale(1.02); }
+    .btn-reject:hover { background: #dc2626; color: white; }
+
+  </style>
+</head>
+<body>
+
+<header class="inspection-header d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+        <a href="verification-review.html" class="btn btn-outline-light btn-sm rounded-pill px-3"><i class="fas fa-arrow-left"></i></a>
+        <h5 class="m-0 fw-800">Security Audit Terminal <span class="text-primary ms-2">• Case #2941</span></h5>
+    </div>
+    <div class="badge bg-primary rounded-pill px-3 py-2 fw-800">Mohit Sharma</div>
+</header>
+
+<div class="main-grid">
+    <aside class="audit-sidebar">
+        <div class="text-center mb-5">
+            <div class="bg-primary mx-auto mb-3 d-flex align-items-center justify-content-center fw-800 rounded-4" style="width: 80px; height: 80px; font-size: 32px;">MS</div>
+            <h4 class="fw-800">Mohit Sharma</h4>
+            <span class="badge bg-light text-dark fw-bold">Electrician Specialist</span>
+        </div>
+
+        <div class="label-audit">Full Legal Name</div>
+        <div class="val-audit">Mohit Ramesh Sharma</div>
+
+        <div class="label-audit">Aadhaar Number</div>
+        <div class="val-audit">XXXX - XXXX - 8821</div>
+
+        <div class="label-audit">Home Address</div>
+        <div class="val-audit">Lane 4, Hinjewadi Phase 1, Pune, Maharashtra 411057</div>
+
+        <div class="label-audit">Member Since</div>
+        <div class="val-audit">28 Dec, 2025</div>
+
+        <hr style="opacity: 0.1; margin: 30px 0;">
+
+        <button class="btn-approve" onclick="confirmAudit('approve')"><i class="fas fa-check-circle me-2"></i> Approve Partner</button>
+        <button class="btn-reject" onclick="confirmAudit('reject')"><i class="fas fa-ban me-2"></i> Decline Access</button>
+    </aside>
+
+    <main class="document-desk">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="d-flex justify-content-between mb-4 px-2">
+                    <h5 class="fw-800 text-muted uppercase" style="font-size: 13px; letter-spacing: 2px;">Document Inspection (Aadhaar Card)</h5>
+                    <span class="text-success small fw-bold"><i class="fas fa-shield-alt me-2"></i>Verified by AI (89% Match)</span>
+                </div>
+
+                <div class="doc-viewer">
+                    <img src="https://via.placeholder.com/800x500?text=Aadhaar+Front+Side+View" alt="Document Front">
+                </div>
+
+                <div class="doc-viewer">
+                    <img src="https://via.placeholder.com/800x500?text=Aadhaar+Back+Side+View" alt="Document Back">
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    function confirmAudit(status) {
+        if(status === 'approve') {
+            alert("✅ Partner Approved. Credentials sent via SMS.");
+            window.location.href = "verification-review.html";
+        } else {
+            prompt("Reason for declination:");
+            window.location.href = "verification-review.html";
+        }
+    }
+</script>
+
+</body>
+</html>

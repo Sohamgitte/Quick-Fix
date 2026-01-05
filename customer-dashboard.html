@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix | Elite Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --brand: #1d4ed8;
+    --brand-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --bg-light: #f8fafc;
+  }
+
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-light); color: #0f172a; display: flex; min-height: 100vh; }
+
+  /* Sidebar Navigation */
+  .sidebar { width: 280px; background: var(--brand-gradient); color: white; padding: 40px 20px; position: fixed; height: 100vh; z-index: 1001; }
+  .nav-item-elite { padding: 15px 20px; border-radius: 15px; color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; transition: 0.3s; font-weight: 600; }
+  .nav-item-elite:hover, .nav-item-elite.active { background: rgba(255,255,255,0.1); color: white; }
+
+  /* Main Content */
+  .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 40px 60px; }
+  .header-premium h1 { font-weight: 800; letter-spacing: -2px; font-size: 2.8rem; }
+
+  /* Status Tracker Visual */
+  .status-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 40px; }
+  .status-step { flex: 1; text-align: center; position: relative; font-weight: 700; font-size: 0.8rem; color: #cbd5e1; }
+  .status-step.active { color: var(--brand); }
+  .status-step::before { content: ''; width: 20px; height: 20px; background: #e2e8f0; border-radius: 50%; display: block; margin: 0 auto 10px; position: relative; z-index: 2; }
+  .status-step.active::before { background: var(--brand); box-shadow: 0 0 15px rgba(29, 78, 216, 0.5); }
+
+  /* Luxury Info Cards */
+  .glass-card { background: white; border-radius: 35px; padding: 40px; border: 1px solid #f1f5f9; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.04); height: 100%; }
+  .detail-box { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; padding: 15px; background: #f8fafc; border-radius: 20px; }
+  .icon-square { width: 50px; height: 50px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+  /* 📍 TRACKING MAP STYLING */
+  .map-box { background: #f1f5f9; border-radius: 30px; height: 350px; position: relative; overflow: hidden; border: 1px solid #e2e8f0; margin-top: 25px; }
+  .map-overlay { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 15px; font-weight: 700; font-size: 0.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); z-index: 5; }
+  .pulse-node { position: absolute; width: 20px; height: 20px; background: var(--brand); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.7); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(29, 78, 216, 0); } 100% { box-shadow: 0 0 0 0 rgba(29, 78, 216, 0); } }
+
+  /* Worker Profile Card */
+  .expert-card { text-align: center; background: white; border-radius: 35px; padding: 40px; border: 1px solid #f1f5f9; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.04); }
+  .expert-avatar { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; background: #f1f5f9 url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') center/cover; border: 4px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+  .btn-verify-elite { background: var(--brand); color: white; border-radius: 100px; padding: 15px 40px; font-weight: 800; border: none; transition: 0.4s; width: 100%; margin-top: 20px; }
+  .btn-verify-elite:hover:not(:disabled) { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(29, 78, 216, 0.3); }
+  .btn-verify-elite:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+  @media (max-width: 991px) { .sidebar { display: none; } .main-content { margin-left: 0; width: 100%; padding: 20px; } }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2 class="fw-800 mb-5"><i class="fas fa-screwdriver-wrench text-primary me-2"></i>QuickFix.</h2>
+  <nav>
+    <a href="customer-home.html" class="nav-item-elite active"><i class="fas fa-home"></i> Home </a>
+    <a href="booking-history.html" class="nav-item-elite"><i class="fas fa-history"></i> History</a>
+    <a href="assign-worker-profile.html" class="nav-item-elite"><i class="fas fa-user"></i> Member Profile</a>
+    <a href="#" class="nav-item-elite text-danger mt-5" onclick="location.reload()"><i class="fas fa-redo"></i> Reset Demo</a>
+  </nav>
+</div>
+
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div class="header-premium">
+      <p class="text-muted fw-700 small mb-1">MEMBER ACCESS TERMINAL</p>
+      <h1>Welcome, <span id="customer-name" class="text-primary">Loading...</span></h1>
+    </div>
+    <button class="btn btn-dark rounded-pill px-4 fw-800 shadow-sm" onclick="runDemoSimulation()">
+        <i class="fas fa-play-circle me-2"></i> Run Demo Mode
+    </button>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="glass-card mb-4">
+        <h5 class="fw-800 mb-4">Service Deployment Status</h5>
+        <div class="status-tracker">
+            <div class="status-step active" id="step-pending">Request Logged</div>
+            <div class="status-step" id="step-accepted">Expert Dispatched</div>
+            <div class="status-step" id="step-arrived">Job Active</div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="icon-square"><i class="fas fa-hashtag"></i></div>
+                    <div><p class="small text-muted mb-0">ORDER ID</p><strong id="booking-id">--</strong></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="icon-square"><i class="fas fa-tools"></i></div>
+                    <div><p class="small text-muted mb-0">SERVICE VERTICAL</p><strong id="service-request">--</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-box" id="mapSection" style="display: none;">
+            <div class="map-overlay"><i class="fas fa-location-arrow text-primary me-2"></i> Expert is 1.2km away</div>
+            <div class="pulse-node"></div>
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
+                <i class="fas fa-map-marked-alt fa-3x opacity-25"></i>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="expert-card">
+        <div class="expert-avatar"></div>
+        <h4 id="worker-name" class="fw-800 mb-1">Awaiting Assignment</h4>
+        <p id="worker-role" class="text-muted small fw-600 mb-4">VERIFIED PROFESSIONAL</p>
+        
+        <div class="d-flex justify-content-center gap-2 mb-4">
+            <button class="btn btn-light rounded-pill px-4 btn-call" id="call-btn" disabled><i class="fas fa-phone"></i></button>
+            <button class="btn btn-light rounded-pill px-4 btn-msg" id="msg-btn" disabled><i class="fas fa-comment"></i></button>
+        </div>
+
+        <button id="verify-btn" class="btn-verify-elite" data-bs-toggle="modal" data-bs-target="#otpModal" disabled>
+            VERIFY OTP CHECK-IN
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="otpModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-4" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
+      <div class="modal-header border-0 pb-0">
+        <h3 class="fw-800">Security Check-in</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="text-muted mb-4">Enter the code: <strong id="otp-hint">123456</strong></p>
+        <input type="text" id="customer-otp" class="form-control form-control-lg text-center fw-800" 
+               placeholder="· · · · · ·" maxlength="6" 
+               style="border-radius: 20px; font-size: 2.5rem; letter-spacing: 12px; background: #f8fafc; border: 2px solid #e2e8f0; height: 80px;">
+        <div id="otp-status" class="mt-4"></div>
+        <button class="btn-verify-elite mt-4" onclick="verifyOTP()">ACTIVATE SERVICE NOW</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 🔥 NEW: DEMO SIMULATION LOGIC
+function runDemoSimulation() {
+    document.querySelector("#customer-name").textContent = "Demo Member";
+    document.querySelector("#booking-id").textContent = "BK-DEMO-99";
+    document.querySelector("#service-request").textContent = "Premium Electrician";
+    
+    // Activate Map & Status
+    document.getElementById('step-accepted').classList.add('active');
+    document.getElementById('mapSection').style.display = 'block';
+    
+    // Expert Data
+    document.querySelector("#worker-name").textContent = "Rahul Sharma (Elite)";
+    document.getElementById("verify-btn").disabled = false;
+    document.getElementById("call-btn").disabled = false;
+    document.getElementById("msg-btn").disabled = false;
+    
+    // Set OTP
+    window.currentOtp = "123456";
+    alert("🚀 Demo mode active: Map is now visible and Expert is assigned!");
+}
+
+async function fetchLatestBooking() {
+  try {
+    const res = await fetch('http://localhost:3000/latest-booking-with-worker');
+    const booking = await res.json();
+
+    if (!booking) return;
+
+    document.querySelector("#customer-name").textContent = booking.customer_name;
+    document.querySelector("#booking-id").textContent = `BK-${booking.booking_id}`;
+    document.querySelector("#service-request").textContent = booking.service;
+
+    if (booking.booking_status === 'accepted') {
+      document.getElementById('step-accepted').classList.add('active');
+      document.getElementById('mapSection').style.display = 'block';
+      document.querySelector("#worker-name").textContent = booking.worker_name;
+      document.getElementById("call-btn").disabled = false;
+      document.getElementById("msg-btn").disabled = false;
+      document.getElementById("verify-btn").disabled = false;
+      window.currentOtp = booking.worker_otp;
+    }
+  } catch (err) { console.log("Waiting for backend..."); }
+}
+
+function verifyOTP() {
+  const enteredOtp = document.getElementById("customer-otp").value.trim();
+  const statusEl = document.getElementById("otp-status");
+
+  if (window.currentOtp && enteredOtp == window.currentOtp) {
+    statusEl.innerHTML = '<div class="alert alert-success rounded-4 fw-bold">✅ CHECK-IN SUCCESSFUL</div>';
+    document.getElementById('step-arrived').classList.add('active');
+    setTimeout(() => {
+        const modal = bootstrap.Modal.getInstance(document.getElementById("otpModal"));
+        modal.hide();
+    }, 2000);
+  } else {
+    statusEl.innerHTML = '<div class="alert alert-danger rounded-4 fw-bold">❌ INVALID OTP CODE</div>';
+  }
+}
+
+fetchLatestBooking();
+setInterval(fetchLatestBooking, 5000);
+</script>
+
+</body>
+</html>

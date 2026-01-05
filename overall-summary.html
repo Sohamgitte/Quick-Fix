@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QuickFix | Elite Platform Summary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --brand: #1d4ed8; 
+      --brand-soft: #eff6ff;
+      --body-bg: #f8fafc;
+      --text-main: #0f172a;
+      --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+    }
+
+    body {
+      background-color: var(--body-bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    /* Hero Header */
+    .hero-nav {
+      background: linear-gradient(135deg, var(--brand), #1e40af);
+      padding: 60px 0 120px;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .navbar-simple {
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .back-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+    .back-link:hover { background: white; color: var(--brand); transform: translateX(-5px); }
+
+    .hero-title { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
+    .hero-sub { opacity: 0.8; font-weight: 500; font-size: 1.1rem; }
+
+    /* Summary Stats Cards (Floating over Hero) */
+    .summary-wrapper { margin-top: -60px; position: relative; z-index: 10; }
+    
+    .stat-card-elite {
+      background: white;
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+      border: 1px solid rgba(255,255,255,0.8);
+      height: 100%;
+      transition: 0.3s;
+    }
+    .stat-card-elite:hover { transform: translateY(-5px); }
+    .stat-card-elite h5 { font-size: 13px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+    .stat-card-elite h2 { font-size: 28px; font-weight: 800; margin: 0; }
+
+    /* Chart Container */
+    .chart-container-elite {
+      background: #fff;
+      border-radius: 32px;
+      padding: 40px;
+      margin: 40px auto 60px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #f1f5f9;
+    }
+
+    .filter-section {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      border: 1px solid #edf2f7;
+    }
+
+    .form-label { font-weight: 800; color: #64748b; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    .form-select { border-radius: 12px; font-weight: 700; border: 2px solid #e2e8f0; padding: 10px 15px; }
+
+    footer { font-weight: 600; color: #94a3b8; }
+
+    @media (max-width: 992px) {
+      .hero-title { font-size: 2rem; }
+      .chart-container-elite { padding: 20px; border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero-nav">
+  <nav class="navbar-simple">
+    <a class="back-link" href="admin-dashboard.html">
+      <i class="fas fa-chevron-left me-2"></i> Dashboard
+    </a>
+    <span class="fw-800 fs-5"><i class="fa-solid fa-screwdriver-wrench me-2 text-white"></i>QuickFix</span>
+  </nav>
+  <div class="container">
+    <h1 class="hero-title">Overall Summary</h1>
+    <p class="hero-sub">Complete analytical breakdown of QuickFix platform growth</p>
+  </div>
+</div>
+
+<div class="container summary-wrapper">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="stat-card-elite">
+        <h5>Total Platform Revenue</h5>
+        <h2 class="text-success">₹1,25,000</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card-elite">
+        <h5>Onboarded Partners</h5>
+        <h2 class="text-primary">412</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card-elite">
+        <h5>Total Client Base</h5>
+        <h2 class="text-warning">820</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-container-elite">
+    <div class="filter-section">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label">Data Metric</label>
+          <select class="form-select" id="dataType">
+            <option value="earnings">Platform Earnings</option>
+            <option value="workers">Worker Growth</option>
+            <option value="customers">Customer Growth</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Fiscal Year</label>
+          <select class="form-select" id="yearFilter">
+            <option value="2024">2024</option>
+            <option value="2025" selected>2025</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Month Filter</label>
+          <select class="form-select" id="monthFilter">
+            <option value="">Full Year View</option>
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8">September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <canvas id="summaryChart" height="120"></canvas>
+  </div>
+</div>
+
+<footer class="text-center py-4">
+  <p class="mb-0 small">&copy; 2025 QuickFix Elite Admin Platform</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const chartCtx = document.getElementById('summaryChart').getContext('2d');
+  let summaryChart;
+
+  const chartData = {
+    earnings: [10000, 15000, 18000, 12000, 22000, 30000, 28000, 35000, 39000, 41000, 43000, 46000],
+    workers: [20, 30, 25, 35, 40, 50, 45, 55, 60, 70, 65, 75],
+    customers: [50, 60, 55, 70, 80, 90, 85, 95, 100, 110, 105, 120]
+  };
+
+  function renderChart(type = 'earnings', month = '') {
+    const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    let data = chartData[type];
+    let chartLabels = labels;
+    let chartDataSet = data;
+
+    if (month !== '') {
+      chartLabels = [labels[month]];
+      chartDataSet = [data[month]];
+    }
+
+    if (summaryChart) summaryChart.destroy();
+
+    // Custom Blue Gradient for Chart
+    const gradient = chartCtx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(29, 78, 216, 0.4)');
+    gradient.addColorStop(1, 'rgba(29, 78, 216, 0)');
+
+    summaryChart = new Chart(chartCtx, {
+      type: 'line', // Changed to line for an Elite Analytics look
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: type.charAt(0).toUpperCase() + type.slice(1),
+          data: chartDataSet,
+          backgroundColor: gradient,
+          borderColor: '#1d4ed8',
+          borderWidth: 4,
+          fill: true,
+          tension: 0.4, // Smooth curve
+          pointBackgroundColor: '#fff',
+          pointBorderWidth: 2,
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { 
+            beginAtZero: true,
+            grid: { color: '#f1f5f9' },
+            ticks: { font: { weight: '600' } }
+          },
+          x: { 
+            grid: { display: false },
+            ticks: { font: { weight: '600' } }
+          }
+        }
+      }
+    });
+  }
+
+  document.getElementById('dataType').addEventListener('change', function () {
+    const selectedMonth = document.getElementById('monthFilter').value;
+    renderChart(this.value, selectedMonth);
+  });
+
+  document.getElementById('monthFilter').addEventListener('change', function () {
+    const selectedType = document.getElementById('dataType').value;
+    renderChart(selectedType, this.value);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => renderChart('earnings'));
+</script>
+
+</body>
+</html>

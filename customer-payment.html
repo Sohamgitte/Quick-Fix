@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Payment - QuickFix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+   body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #eef5ff, #f9fbff);
+  padding-top: 80px; /* ✅ Prevents overlap */
+}
+
+    
+ /* 🔵 Updated Navbar Style */
+  .navbar-custom {
+    background: #0d6efd; /* solid blue */
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  .navbar-brand {
+    color: #fff !important;
+  }
+
+  .navbar-toggler {
+    border-color: #fff;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255, 0.75)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
+  .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin: 0 0.5rem;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #fff; /* white underline on hover/active */
+    border-radius: 2px;
+  }
+
+    .container {
+      max-width: 700px;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: none;
+    }
+    h2 {
+      font-weight: 700;
+      color: #0d6efd;
+    }
+    h4 {
+      font-weight: 600;
+      margin-top: 30px;
+      color: #333;
+    }
+    .card-body p {
+      font-size: 1rem;
+      
+      margin-bottom: 8px;
+    }
+    .payment-option {
+      cursor: pointer;
+      padding: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: #fff;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .payment-option:hover,
+    .active-method {
+      border-color: #0d6efd;
+      background: #0d6efd;
+      color: #f4f5f7;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    .hidden {
+      display: none;
+    }
+    #upiSection, #cardSection, #cashSection {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    label {
+      font-weight: 500;
+    }
+    .btn-primary {
+      padding: 10px 30px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+    #upiSection img {
+      width: 180px;
+      margin: 10px 0;
+    }
+    #successMessage {
+      font-size: 1.2rem;
+    }
+
+    
+   
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand text-primary fs-3 fw-bold" href="#"><i class="fas fa-wrench me-1"></i>QuickFix</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="customer-Profile.html">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="customer-payments.html">Payments</a></li>
+          <li class="nav-item"><a class="nav-link" href="booking-history.html">Bookings</a></li>
+<li class="nav-item">
+  <a class="nav-link fw-bold" href="index.html" style="color: red !important;">Logout</a>
+</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container py-5">
+    <h2 class="mb-4 text-center">Review Your Booking Details</h2>
+
+    <!-- Booking Card -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <p><strong>Name:</strong> <span id="displayName"></span></p>
+        <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+        <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+        <p><strong>Service:</strong> <span id="displayService"></span></p>
+        <p><strong>Preferred Date:</strong> <span id="displayDate"></span></p>
+        <p><strong>Preferred Time:</strong> <span id="displayTime"></span></p>
+        <p><strong>Platform Fee:</strong> <span class="text-primary">₹129.00</span></p>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <h4 class="mb-3">Select Payment Method</h4>
+    <div class="payment-option" id="upiOption">
+      <i class="fas fa-qrcode me-2"></i> Pay via UPI
+    </div>
+    <div class="payment-option" id="cardOption">
+      <i class="fas fa-credit-card me-2"></i> Pay via Card
+    </div>
+    <div class="payment-option" id="cashOption">
+      <i class="fas fa-money-bill-wave me-2"></i> Cash on Service
+    </div>
+<!--upi section -->
+  <div class="mb-3 hidden" id="upiSection">
+  <h6 class="mb-2">Scan & Pay via UPI</h6>
+  <img src="assets/QR CODE.png" alt="UPI QR Code">
+  <p class="mt-2 text-muted">UPI ID: <strong>quickfix@upi</strong></p>
+  <label>OR Enter UPI ID:</label>
+  <input type="text" class="form-control mt-2" placeholder="example@upi" />
+</div>
+
+
+    <!-- Card Payment -->
+    <div class="mb-3 hidden" id="cardSection">
+      <label>Card Number:</label>
+      <input type="text" class="form-control mb-2" placeholder="**** **** **** 1234" />
+      <div class="row">
+        <div class="col">
+          <label>Expiry:</label>
+          <input type="text" class="form-control" placeholder="MM/YY" />
+        </div>
+        <div class="col">
+          <label>CVV:</label>
+          <input type="password" class="form-control" placeholder="*" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Cash on Service -->
+    <div class="mb-3 hidden" id="cashSection">
+      <p class="mb-0">You have selected <strong>Cash on Service</strong>.</p>
+    </div>
+
+    <!-- Confirm Button -->
+    <div class="text-center">
+      <button class="btn btn-primary mt-4" id="confirmPaymentBtn">Confirm Payment</button>
+    </div>
+
+    <!-- Success Message -->
+    <div class="text-center mt-3 text-success fw-bold d-none" id="successMessage">
+      <i class="fas fa-check-circle"></i> Payment Successful!
+    </div>
+  </div>
+
+  <!-- Bootstrap & Icons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/quickfix.js"></script>
+
+
+
+ 
+</body>
+</html>

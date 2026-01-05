@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickFix | Elite Settlement Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --sidebar-blue: #1d4ed8;
+      --body-bg: #f8fafc;
+      --slate-dark: #0f172a;
+      --border-light: #e2e8f0;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--body-bg);
+      color: var(--slate-dark);
+      padding: 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Professional Navigation */
+    .btn-back-hub {
+      background: #fff; border: 1px solid var(--border-light); padding: 12px 24px; border-radius: 16px;
+      font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-bottom: 30px; color: var(--slate-dark); font-size: 14px;
+    }
+    .btn-back-hub:hover { background: var(--slate-dark); color: #fff; transform: translateX(-5px); }
+
+    /* Top Premium Banner */
+    .settlement-banner {
+      background: linear-gradient(135deg, var(--sidebar-blue) 0%, #1e40af 100%);
+      color: white; border-radius: 35px; padding: 45px; margin-bottom: 45px;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 25px 50px -12px rgba(29, 78, 216, 0.25);
+      position: relative; overflow: hidden;
+    }
+    .settlement-banner::after {
+      content: ''; position: absolute; right: -50px; top: -50px; width: 200px; height: 200px;
+      background: rgba(255,255,255,0.05); border-radius: 50%;
+    }
+
+    .btn-withdraw-elite {
+      background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px); font-weight: 800; padding: 14px 28px; border-radius: 18px;
+      transition: 0.3s; font-size: 14px;
+    }
+    .btn-withdraw-elite:hover { background: #fff; color: var(--sidebar-blue); transform: translateY(-3px); }
+
+    /* Table Container Polish */
+    .table-container-elite {
+      background: #fff; border-radius: 32px; padding: 35px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02); border: 1px solid var(--border-light);
+      margin-bottom: 50px;
+    }
+
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding: 0 10px; }
+    .section-title { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.8px; }
+
+    /* Data Styling */
+    .worker-card { display: flex; align-items: center; gap: 15px; }
+    .worker-img-sq { width: 48px; height: 48px; border-radius: 14px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .id-badge { font-size: 10px; background: #f1f5f9; padding: 3px 8px; border-radius: 6px; color: #64748b; font-weight: 700; display: inline-block; margin-top: 4px; }
+    
+    .status-pill { padding: 6px 14px; border-radius: 100px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid transparent; }
+    .pill-warning { background: #fff1f2; color: #e11d48; border-color: #ffe4e6; }
+    .pill-unpaid { background: #fef2f2; color: #b91c1c; border-color: #fee2e2; }
+    .pill-paid { background: #f0fdf4; color: #15803d; border-color: #dcfce7; }
+    .pill-cash { background: #fffbeb; color: #d97706; border-color: #fef3c7; }
+
+    .text-detail { font-weight: 700; color: var(--slate-dark); font-size: 0.95rem; }
+    .text-muted-small { font-size: 0.8rem; color: #64748b; font-weight: 500; }
+
+    .btn-table-action { border: none; font-weight: 800; padding: 12px 24px; border-radius: 14px; font-size: 12px; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .btn-verify { background: var(--slate-dark); color: #fff; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
+    .btn-settle { background: var(--sidebar-blue); color: #fff; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15); }
+    .btn-table-action:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+    
+    .badge-count { background: var(--slate-dark); color: #fff; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="container-fluid">
+    <a href="admin-dashboard.html" class="btn-back-hub">
+      <i class="fa-solid fa-chevron-left"></i> Admin Dashboard Control
+    </a>
+
+    <div class="settlement-banner shadow">
+      <div>
+        <h2 class="fw-800 m-0">Settlement Hub</h2>
+        <p class="m-0 opacity-75 mt-1">Institutional ledger for verified service transactions.</p>
+      </div>
+      <div class="text-end text-white">
+        <small class="text-uppercase fw-bold opacity-60">Gross Platform Revenue</small>
+        <h1 class="fw-800 m-0">₹24,840.00</h1>
+        <button class="btn-withdraw-elite mt-3"><i class="fa-solid fa-vault me-2"></i>Withdrawal Terminal</button>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h4 class="section-title text-dark"><i class="fa-solid fa-hand-holding-dollar me-3 text-warning"></i>Cash Recovery Ledger</h4>
+      <span class="status-pill pill-warning px-3 py-2"><i class="fa-solid fa-circle-exclamation me-1"></i> Deposit Pending</span>
+    </div>
+
+    <div class="table-container-elite">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="text-muted small text-uppercase">
+            <tr style="border-bottom: 2px solid #f1f5f9;">
+              <th class="pb-3">Customer</th>
+              <th class="pb-3">Partner Details</th>
+              <th class="pb-3 text-center">Service</th>
+              <th class="pb-3 text-center">Bill Amount</th>
+              <th class="pb-3 text-center">Cash Jobs</th>
+              <th class="pb-3 text-center">In-Hand Cash</th>
+              <th class="pb-3 text-center">Access Status</th>
+              <th class="pb-3 text-center">Finance Status</th>
+              <th class="pb-3 text-end">Action</th>
+            </tr>
+          </thead>
+          <tbody class="fw-600">
+            <tr>
+              <td>
+                <div class="text-detail">Aryan S.</div>
+                <div class="id-badge">ID: C-102</div>
+              </td>
+              <td class="py-4">
+                <div class="worker-card">
+                  <img src="https://i.pravatar.cc/150?u=w1" class="worker-img-sq">
+                  <div>
+                    <div class="text-detail">Mohit Sharma</div>
+                    <div class="id-badge">ID: W-8821</div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center text-muted-small">Electrician</td>
+              <td class="text-center text-detail">₹1,500</td>
+              <td class="text-center">
+                <span class="badge-count">03</span>
+              </td>
+              <td class="text-center text-danger fw-800">₹4,500</td>
+              <td class="text-center">
+                <span class="status-pill pill-warning">Blocked Cash Jobs</span>
+              </td>
+              <td class="text-center">
+                <span class="status-pill pill-unpaid">Pending</span>
+              </td>
+              <td class="text-end">
+                <button class="btn-table-action btn-verify" onclick="confirm('Verify full cash recovery of ₹4,500?')">Confirm Request</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h4 class="section-title text-dark"><i class="fa-solid fa-bolt-lightning me-3 text-primary"></i>Online Gateway Payments</h4>
+      <span class="status-pill pill-paid px-3 py-2"><i class="fa-solid fa-circle-check me-1"></i> Auto-Settle Enabled</span>
+    </div>
+
+    <div class="table-container-elite">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="text-muted small text-uppercase">
+            <tr style="border-bottom: 2px solid #f1f5f9;">
+              <th class="pb-3">Customer</th>
+              <th class="pb-3">Partner Details</th>
+              <th class="pb-3 text-center">Service Category</th>
+              <th class="pb-3 text-center">Transaction Value</th>
+              <th class="pb-3 text-center">Commission (20%)</th>
+              <th class="pb-3 text-center">Gateway Status</th>
+              <th class="pb-3 text-end">Settlement</th>
+            </tr>
+          </thead>
+          <tbody class="fw-600">
+            <tr>
+              <td>
+                <div class="text-detail">Sneha K.</div>
+                <div class="id-badge">ID: C-205</div>
+              </td>
+              <td class="py-4">
+                <div class="worker-card">
+                  <img src="https://i.pravatar.cc/150?u=w3" class="worker-img-sq">
+                  <div>
+                    <div class="text-detail">Sanjeev Kumar</div>
+                    <div class="id-badge">ID: W-7712</div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center text-muted-small">AC Repair</td>
+              <td class="text-center text-detail">₹2,400</td>
+              <td class="text-center text-danger">₹480</td>
+              <td class="text-center">
+                <span class="status-pill pill-paid">Success</span>
+              </td>
+              <td class="text-end">
+                <button class="btn-table-action btn-settle">Execute Cut</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

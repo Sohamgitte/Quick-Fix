@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trust Agreement | QuickFix Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb; 
+      --surface: #ffffff;
+      --bg: #fcfcfc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.6;
+    }
+
+    /* 🔵 ELITE FLOATING NAV WITH INTEGRATED TEXT LOGO */
+    .top-nav {
+      position: fixed;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1100px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(25px) saturate(180%);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 12px 30px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+
+    /* Your Logo Styling */
+    .brand-logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo i { font-size: 1.2rem; color: var(--primary); }
+
+    .btn-exit {
+      background: var(--text);
+      color: white; border: none; padding: 10px 22px;
+      border-radius: 14px; font-weight: 700; font-size: 0.85rem;
+      transition: 0.3s; text-decoration: none;
+    }
+    .btn-exit:hover { background: var(--primary); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37,99,235,0.2); }
+
+    /* Hero Styling */
+    .hero {
+      padding: 180px 0 60px;
+      text-align: center;
+      background: radial-gradient(circle at top, #eff6ff 0%, transparent 60%);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .badge-premium {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1050px;
+      margin: 0 auto 100px;
+      padding: 0 20px;
+    }
+
+    .bento-item {
+      background: white;
+      border: 1px solid #f0f0f0;
+      border-radius: 35px;
+      padding: 45px;
+      transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .bento-item:hover {
+      border-color: var(--primary);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+      transform: translateY(-8px);
+    }
+
+    .bento-item.full { grid-column: span 2; }
+
+    .icon-box {
+      width: 52px; height: 52px; background: #eff6ff; color: var(--primary);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 25px;
+    }
+
+    .bento-item h3 { font-weight: 800; font-size: 1.7rem; margin-bottom: 16px; }
+    .bento-item p { color: var(--text-muted); font-weight: 500; font-size: 1.05rem; }
+
+    .bento-list { padding: 0; list-style: none; margin-top: 20px; }
+    .bento-list li {
+      display: flex; gap: 12px; margin-bottom: 12px; color: var(--text-muted); font-weight: 600; font-size: 0.95rem;
+    }
+    .bento-list li i { color: var(--primary); margin-top: 5px; }
+
+    @media (max-width: 768px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-item.full { grid-column: span 1; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+ <nav class="top-nav">
+    <a href="index.html" class="brand-logo text-decoration-none">
+        <i class="fa-solid fa-screwdriver-wrench text-primary"></i> <span>QuickFix.</span>
+    </a>
+    
+    <a href="javascript:void(0);" onclick="goBack()" class="btn-exit text-decoration-none">
+        Close Document
+    </a>
+</nav>
+
+<script>
+  function goBack() {
+    // Agar pichla page hamari hi website ka hai, toh wahi bhej do
+    if (document.referrer !== "") {
+      window.location.href = document.referrer;
+    } else {
+      // Agar direct page open kiya hai toh default home pe bhej do
+      window.location.href = "index.html";
+    }
+  }
+</script>
+  <section class="hero container">
+    <span class="badge-premium mb-3">Governance Framework • 2026</span>
+    <h1>The Trust <br>Agreement.</h1>
+    <p class="text-muted mx-auto fw-500" style="max-width: 600px;">
+        QuickFix is built on mutual respect and safety. This is how we formalize the connection between expert partners and local members.
+    </p>
+  </section>
+
+  <div class="bento-grid">
+    <div class="bento-item full">
+      <div class="icon-box"><i class="fas fa-layer-group"></i></div>
+      <h3>Operational Architecture</h3>
+      <p>QuickFix acts as a digital bridge between service demand and skilled professional supply. While we perform multi-stage Aadhaar-linked verification for every partner, the service engagement remains a direct professional handshake.</p>
+    </div>
+
+    <div class="bento-item">
+      <div class="icon-box"><i class="fas fa-bolt"></i></div>
+      <h3>Platform Fee</h3>
+      <p>We charge a minimal connection fee to maintain the ecosystem's security and verification layers.</p>
+    </div>
+
+    <div class="bento-item">
+      <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+      <h3>Zero-Trust Security</h3>
+      <p>Every deployment is secured with a unique OTP-handshake protocol to ensure identity verification at the site.</p>
+    </div>
+
+    <div class="bento-item">
+      <h3>Member Duty</h3>
+      <ul class="bento-list">
+        <li><i class="fas fa-check-circle"></i> Provide transparent service parameters.</li>
+        <li><i class="fas fa-check-circle"></i> Honor the scheduled arrival window.</li>
+        <li><i class="fas fa-check-circle"></i> Verify Partner ID before OTP sharing.</li>
+      </ul>
+    </div>
+
+    <div class="bento-item">
+      <h3>Partner Duty</h3>
+      <ul class="bento-list">
+        <li><i class="fas fa-check-circle"></i> Uphold standardized labor pricing.</li>
+        <li><i class="fas fa-check-circle"></i> Maintain active Pro-Verified status.</li>
+        <li><i class="fas fa-check-circle"></i> Professional conduct at all sites.</li>
+      </ul>
+    </div>
+
+    <div class="bento-item full" style="background: #0f172a; color: white;">
+      <h3 style="color: white;">Resolution Terminal</h3>
+      <p style="color: #94a3b8;">Post-OTP verification, QuickFix provides a mediation log for all technical disputes or damage claims for audit-grade investigation.</p>
+    </div>
+  </div>
+
+  <footer class="text-center py-5 border-top">
+    <p class="small text-muted fw-800">© 2026 QuickFix Services India • Formalizing the Gig Economy</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

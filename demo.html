@@ -1,0 +1,91 @@
+<div id="approvalOverlay" class="position-fixed top-0 start-0 w-100 h-100 d-none" style="background: rgba(255, 255, 255, 0.95); z-index: 9999; backdrop-filter: blur(20px);">
+  <div class="position-absolute top-50 start-50 translate-middle w-100 px-4" style="max-width: 500px;">
+    
+    <div class="p-5 shadow-2xl" style="background: #ffffff; border: 2px solid #000; border-radius: 0 !important;">
+      
+      <div class="d-flex align-items-center gap-4 mb-5 border-bottom pb-4">
+         <div style="width: 70px; height: 70px; background: #f1f5f9; border: 1px solid #eee; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-user-gear fa-2x text-primary"></i>
+         </div>
+         <div class="text-start">
+            <h5 class="fw-900 text-dark m-0 text-uppercase" id="workerName" style="letter-spacing: 1px;">Partner: Rahul Sharma</h5>
+            <span class="badge bg-dark text-white extra-small mt-1" style="border-radius: 0;">ID: QFX-8829</span>
+         </div>
+      </div>
+
+      <div class="text-start mb-5">
+         <p class="text-muted extra-small fw-800 text-uppercase mb-1" style="letter-spacing: 2px;">Session Brief</p>
+         <h4 class="fw-900 text-dark" id="serviceType">HVAC Precision Maintenance</h4>
+         <p class="text-muted small fw-600 m-0">Includes grid diagnostics, filter sterilization, and pressure audit.</p>
+      </div>
+
+      <div class="p-4 mb-5 text-center" style="background: #f8fafc; border: 1px dashed #3b82f6;">
+         <span class="text-muted small fw-800 text-uppercase d-block mb-1">Total Settlement Due</span>
+         <h1 class="display-3 fw-900 text-dark m-0" id="finalPrice" style="letter-spacing: -4px;">₹1,450</h1>
+      </div>
+
+      <div class="text-start mb-4">
+         <p class="text-muted extra-small fw-800 text-uppercase mb-3" style="letter-spacing: 2px;">Select Payment Protocol</p>
+         <div class="d-grid gap-3">
+            
+            <button onclick="handleUPIPayment()" class="btn btn-primary py-3 fw-900 d-flex align-items-center justify-content-between px-4 rounded-0 shadow-lg">
+               <span>PAY VIA UPI (GPay/PhonePe)</span>
+               <i class="fas fa-mobile-screen-button"></i>
+            </button>
+
+            <button onclick="handleCashPayment()" class="btn btn-outline-dark py-3 fw-900 d-flex align-items-center justify-content-between px-4 rounded-0">
+               <span>SETTLE VIA CASH</span>
+               <i class="fas fa-hand-holding-dollar"></i>
+            </button>
+            
+         </div>
+      </div>
+
+      <button onclick="closeApproval()" class="btn btn-link text-danger fw-800 extra-small text-decoration-none w-100">REPORT INACCURATE BILLING</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Simulation: Ye data worker side se aayega
+  function openSettlementNode(name, service, amount) {
+    document.getElementById('workerName').innerText = 'Partner: ' + name;
+    document.getElementById('serviceType').innerText = service;
+    document.getElementById('finalPrice').innerText = '₹' + amount;
+    
+    document.getElementById('approvalOverlay').classList.remove('d-none');
+    gsap.from("#approvalOverlay div", { opacity: 0, y: 30, duration: 0.6, ease: "power4.out" });
+  }
+
+  // UPI Logic: Ye seedha UPI Apps trigger karega
+  function handleUPIPayment() {
+    const amount = document.getElementById('finalPrice').innerText.replace('₹', '');
+    const upiID = "quickfix@upi"; // Tera ya Admin ka UPI ID
+    const name = "QuickFix Admin";
+    
+    // Deep Link URL for UPI
+    const upiUrl = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
+    
+    window.location.href = upiUrl; // Mobile par apps khol dega
+    
+    setTimeout(() => {
+        alert("Payment Syncing with Admin Node... Transaction Logged.");
+        closeApproval();
+    }, 2000);
+  }
+
+  // Cash Logic: Admin ko confirmation
+  function handleCashPayment() {
+    const amount = document.getElementById('finalPrice').innerText;
+    alert(`Cash Protocol Triggered. Requesting Admin Verification for ${amount}. Session will terminate after physical handover.`);
+    // Yahan tera API call admin ko message bhejega
+    closeApproval();
+  }
+
+  function closeApproval() {
+    document.getElementById('approvalOverlay').classList.add('d-none');
+  }
+
+  // For Demo: Run openSettlementNode('Rahul Sharma', 'HVAC Elite Service', '1450')
+</script>
