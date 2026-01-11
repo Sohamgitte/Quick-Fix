@@ -123,57 +123,62 @@
     </div>
   </nav>
 
-  <section id="home" class="position-relative overflow-hidden d-flex align-items-center" style="min-height: 100vh; background: #ffffff;">
+ <section id="home" class="position-relative overflow-hidden d-flex align-items-center" style="min-height: 100vh; background: #fbfbfd; color: #1d1d1f;">
   
-  <h1 class="position-absolute start-0 w-100 text-center opacity-05 fw-900" style="font-size: 20vw; top: 50%; transform: translateY(-50%); color: #000; pointer-events: none; letter-spacing: -10px; z-index: 0;">QUICKFIX</h1>
+  <div class="position-absolute" style="top: -10%; right: -5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(29, 78, 216, 0.05) 0%, transparent 70%); z-index: 1;"></div>
 
   <div class="container position-relative" style="z-index: 2;">
-    <div class="row align-items-center g-0">
+    <div class="row align-items-center g-5">
       
-      <div class="col-lg-6 py-5" data-aos="fade-right">
-        <div class="badge-elite mb-4 d-inline-flex align-items-center gap-2 px-3 py-2" style="background: #f0f7ff; border: 1px solid #d0e7ff;">
-          <span class="pulse-dot"></span>
-          <span class="text-primary fw-900 text-uppercase small" style="letter-spacing: 2px;">FixoFix Network 2.0</span>
+      <div class="col-lg-6" data-aos="fade-right">
+        <div class="mb-4">
+          <span class="px-3 py-2 rounded-pill fw-800" style="background: #1d4ed8; color: #fff; font-size: 0.7rem; letter-spacing: 1.5px;">
+            SYSTEM v2.0 READY
+          </span>
         </div>
         
-        <h1 class="display-1 fw-900 text-dark mb-4" style="letter-spacing: -6px; line-height: 0.9;">
-          The <span class="text-primary">Gold</span> Standard <br>of Home Care.
+        <h1 class="display-2 fw-900 mb-4" style="letter-spacing: -4px; line-height: 0.9;">
+          Smart Care.<br>
+          <span class="text-primary">Precisely</span> Deployed.
         </h1>
         
-        <p class="fs-5 text-secondary mb-5 fw-500" style="max-width: 480px; line-height: 1.6;">
-          India's most sophisticated infrastructure for high-end maintenance. Strictly audited, biometrically verified, and geofenced for precision.
+        <p class="fs-5 mb-5 text-secondary fw-500" style="max-width: 500px; line-height: 1.6;">
+            Fixofix orchestrates high-end home maintenance with biometric security and geofenced worker logistics. 
         </p>
 
         <div class="d-flex align-items-center gap-4">
-          <a href="customer.html" class="btn-pro-black">
-            Book Terminal <i class="fas fa-arrow-right ms-2"></i>
+          <a href="customer.html" class="btn-main-black">
+            Book Service Now <i class="fas fa-chevron-right ms-2 small"></i>
           </a>
-          <a href="worker.html" class="text-dark fw-900 text-decoration-none border-bottom border-2 border-dark pb-1">
+          <a href="worker.html" class="fw-800 text-dark text-decoration-none border-bottom border-2 border-dark pb-1">
             Partner Access
           </a>
         </div>
+
+        
       </div>
 
-      <div class="col-lg-6 position-relative" data-aos="zoom-in-left">
-        <div class="hero-visual-wrapper ps-lg-5">
-          <div class="position-relative overflow-hidden shadow-2xl" style="height: 600px; border-radius: 40px 0 40px 0;">
-            <img src="images/hero2.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+      <div class="col-lg-6" data-aos="zoom-out">
+        <div class="visual-stack-container position-relative">
             
-            <div class="position-absolute bottom-0 start-0 m-4 p-4 d-flex align-items-center gap-4 backdrop-blur-lg" style="background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; width: 80%;">
-               <div class="stats-circle d-flex align-items-center justify-content-center bg-primary text-white fw-900" style="width: 60px; height: 60px; border-radius: 50%; min-width: 60px;">
-                 <i class="fas fa-bolt"></i>
-               </div>
-               <div>
-                 <p class="m-0 fw-900 text-dark">ANTI-GHOSTING PROTECTION</p>
-                 <p class="m-0 text-muted small fw-600">secures expert commitment through a verified deposit.</p>
-               </div>
+            <div class="hero-img-box shadow-2xl">
+                <img src="images/hero2.jpg" class="img-fluid" style="border-radius: 30px; transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);">
             </div>
-          </div>
-          
-          <div class="position-absolute top-0 end-0 m-5 p-3 bg-white shadow-xl d-flex align-items-center gap-2" style="border-radius: 100px; z-index: 10;">
-             <i class="fas fa-check-circle text-success"></i>
-             <span class="fw-900 small text-dark"> VERIFIED WORKERS</span>
-          </div>
+
+            <div class="glass-float shadow-lg p-3" style="top: 10%; left: -10%; width: 220px;">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="pulse-dot-blue"></div>
+                    <span class="fw-900 small">WORKER DISPATCHED</span>
+                </div>
+                <div class="mt-2 extra-small fw-700 opacity-75">ETA: 12 Minutes</div>
+            </div>
+
+            <div class="glass-float shadow-lg p-3" style="bottom: 15%; right: -5%; width: 200px;">
+                <i class="fas fa-fingerprint text-primary fs-3 mb-2 d-block"></i>
+                <span class="fw-900 small">VERIFIED IDENTITY</span>
+                <p class="m-0 extra-small opacity-50">Biometric Handshake</p>
+            </div>
+
         </div>
       </div>
 
@@ -182,21 +187,36 @@
 </section>
 
 <style>
-  /* PREMIUM UI UTILITIES */
-  .display-1 { font-size: 5.5rem !important; }
-  .pulse-dot { width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; animation: pulse 1.5s infinite; }
-  .backdrop-blur-lg { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
-  .opacity-05 { opacity: 0.05; }
-  .btn-pro-black {
-    background: #000; color: #fff; padding: 18px 40px; text-decoration: none;
-    font-weight: 900; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;
-  }
-  .btn-pro-black:hover { background: #3b82f6; transform: translateY(-5px); }
-  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+  .fw-900 { font-weight: 900; }
+  .extra-small { font-size: 0.7rem; }
   
+  .btn-main-black {
+    background: #000; color: #fff; padding: 18px 45px; border-radius: 20px;
+    text-decoration: none; font-weight: 800; transition: 0.3s;
+  }
+  .btn-main-black:hover { background: #1d4ed8; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(29, 78, 216, 0.2); }
+
+  .visual-stack-container { padding: 40px; }
+  
+  .glass-float {
+    position: absolute; background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.4);
+    z-index: 10; animation: float 4s ease-in-out infinite;
+  }
+
+  .pulse-dot-blue { width: 10px; height: 10px; background: #1d4ed8; border-radius: 50%; box-shadow: 0 0 10px #1d4ed8; animation: pulse 2s infinite; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
   @media (max-width: 992px) {
-    .display-1 { font-size: 3.5rem !important; }
-    .hero-visual-wrapper { margin-top: 50px; }
+    .display-2 { font-size: 3rem !important; }
+    .glass-float { display: none; }
+    .hero-img-box img { transform: none !important; }
   }
 </style>
 
@@ -290,7 +310,7 @@
         
         <h2 class="display-4 text-white mb-4 fw-900" style="letter-spacing: -3px; line-height: 0.85;">Elite Discovery. <br><span class="text-primary">Radical Safety.</span></h2>
         
-        <p class="text-white opacity-50 mb-5 fw-500" style="font-size: 1.1rem; max-width: 90%;">The QuickFix Customer Terminal is meticulously engineered for frictionless service discovery and autonomous resource allocation.</p>
+        <p class="text-white opacity-50 mb-5 fw-500" style="font-size: 1.1rem; max-width: 90%;">The FixoFix Customer Terminal is meticulously engineered for frictionless service discovery and autonomous resource allocation.</p>
         
         <div class="row g-4">
           <div class="col-md-6">
@@ -413,7 +433,7 @@
         
         <h2 class="display-4 text-white mb-4 fw-900" style="letter-spacing: -3px; line-height: 0.85;">Dignity through <br><span class="text-primary">Engineering.</span></h2>
         
-        <p class="text-white opacity-50 mb-5 fw-500" style="font-size: 1.1rem; max-width: 90%;">QuickFix Pro is not merely an application; it is a professional ecosystem engineered to transform gig-workers into elite, certified technicians.</p>
+        <p class="text-white opacity-50 mb-5 fw-500" style="font-size: 1.1rem; max-width: 90%;">FixoFix Pro is not merely an application; it is a professional ecosystem engineered to transform gig-workers into elite, certified technicians.</p>
         
         <div class="row g-4">
           <div class="col-md-6">
@@ -666,7 +686,7 @@
         <div class="col-md-4 col-lg-3">
           <h6 class="fw-bold mb-4 text-white">Contact Us</h6>
           <p class="footer-text-white small mb-2"><i class="fa-solid fa-envelope me-2 text-primary"></i> support@fixofix.in</p>
-          <p class="footer-text-white small mb-2"><i class="fa-solid fa-phone me-2 text-primary"></i> +91 1800-QFIX-247</p>
+          <p class="footer-text-white small mb-2"><i class="fa-solid fa-phone me-2 text-primary"></i> +91 1800-FFIX-247</p>
           <p class="footer-text-white small"><i class="fa-solid fa-location-dot me-2 text-primary"></i> DLF Cyber City, Gurugram</p>
         </div>
         <div class="col-lg-3">
