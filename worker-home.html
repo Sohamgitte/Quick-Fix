@@ -146,7 +146,7 @@
       <div class="row align-items-center">
         <div class="col-lg-8">
           <div class="mb-4"><span class="badge bg-primary px-3 py-2 rounded-pill fw-800">PARTNER TERMINAL v2.0</span></div>
-          <h1>Operations Center, <br>Swanand Raut.</h1>
+          <h1>Operations Center, <br>Gaurav Kamble.</h1>
           <p class="mt-3 opacity-75 fw-500 fs-5">Monitor your deployments, earnings, and performance metrics in real-time.</p>
         </div>
       </div>
@@ -174,15 +174,15 @@
             <div class="stat-bento">
                 <i class="fas fa-wallet stat-icon"></i>
                 <p class="stat-label">Net Earnings</p>
-                <h2 class="fw-800">₹14,250.00</h2>
-                <div class="mt-2 text-success small fw-700"><i class="fas fa-arrow-up me-1"></i>12% from last week</div>
+                <h2 class="fw-800">₹0</h2>
+                <div class="mt-2 text-success small fw-700"><i class="fas fa-arrow-up me-1"></i>0% from last week</div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="stat-bento">
                 <i class="fas fa-check-circle stat-icon"></i>
                 <p class="stat-label">Success Rate</p>
-                <h2 class="fw-800">98.5%</h2>
+                <h2 class="fw-800">0%</h2>
                 <div class="mt-2 text-primary small fw-700">Top 1% of Partners</div>
             </div>
         </div>
@@ -190,7 +190,7 @@
             <div class="stat-bento">
                 <i class="fas fa-star stat-icon"></i>
                 <p class="stat-label">Member Rating</p>
-                <h2 class="fw-800">4.92</h2>
+                <h2 class="fw-800">0</h2>
                 <div class="mt-2 text-warning">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
@@ -198,94 +198,143 @@
         </div>
     </div>
 
-    <div class="job-card-elite mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <h3 class="fw-800 m-0" style="letter-spacing: -1.5px;">Active Deployments</h3>
-            <div class="spinner-grow text-primary spinner-grow-sm"></div>
-        </div>
-
-        <div class="job-item">
-    <div class="d-flex align-items-center gap-4">
-        <div class="client-avatar">SR</div>
-        <div>
-            <h5 class="fw-800 mb-1">Soham Gitte</h5>
-            <p class="text-muted small m-0 fw-600"><i class="fas fa-location-dot me-2 text-primary"></i>Pune</p>
-        </div>
+   <div class="job-card-elite mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h3 class="fw-800 m-0" style="letter-spacing: -1.5px;">Active Deployments</h3>
+        <div class="spinner-grow text-primary spinner-grow-sm"></div>
     </div>
- <div class="d-none d-lg-block">
-                <p class="stat-label m-0">Service</p>
-                <h6 class="fw-800 m-0">Plumber</h6>
+
+    <div class="job-item">
+        <div class="d-flex align-items-center gap-4">
+            <div class="client-avatar">SR</div>
+            <div>
+                <h5 class="fw-800 mb-1">Soham Gitte</h5>
+                <p class="text-muted small m-0 fw-600"><i class="fas fa-location-dot me-2 text-primary"></i>Aurangabad</p>
             </div>
-    <div class="text-end d-flex flex-column gap-2" style="min-width: 180px;">
-        <button class="btn btn-outline-primary rounded-pill fw-800 py-2" data-bs-toggle="modal" data-bs-target="#workerNegotiationModal">
-            <i class="fas fa-handshake me-2"></i>Negotiate
-        </button>
-        <button class="btn-action-glow py-2" onclick="generateOTP('1023')">
-            Mark Arrived
-        </button>
+        </div>
+        <div class="d-none d-lg-block">
+            <p class="stat-label m-0">Service</p>
+            <h6 class="fw-800 m-0">Plumber</h6>
+        </div>
+        <div class="text-end d-flex flex-column gap-2" style="min-width: 180px;">
+            <button class="btn btn-warning rounded-pill fw-800 py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#customerOfferModal">
+                <i class="fas fa-comment-dollar me-2"></i>Counter Offer
+            </button>
+
+            <button class="btn btn-outline-primary rounded-pill fw-800 py-2" data-bs-toggle="modal" data-bs-target="#workerNegotiationModal">
+                <i class="fas fa-handshake me-2"></i>Negotiate
+            </button>
+
+            <button class="btn-action-glow py-2" onclick="generateOTP('1023')">
+                Mark Arrived
+            </button>
+        </div>
     </div>
 </div>
-        <div class="job-item">
-            <div class="d-flex align-items-center gap-4">
-                <div class="client-avatar" style="background: #7c3aed;">RS</div>
-                <div>
-                    <h5 class="fw-800 mb-1">Swanand Raut</h5>
-                    <p class="text-muted small m-0 fw-600"><i class="fas fa-location-dot me-2 text-primary"></i>Aurangabad</p>
+
+<div class="modal fade" id="otpModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg">
+            <div class="modal-body p-4 text-center">
+                <div class="mb-4"><i class="fas fa-shield-check fa-4x text-success opacity-50"></i></div>
+                <h2 class="fw-800 mb-2">Deploy OTP</h2>
+                <p class="text-muted mb-4">Provide this secure code to the client to initialize the service session.</p>
+                <div class="otp-box-luxe mb-4" id="otpValue">000000</div>
+                <div class="small fw-800 text-muted mb-4">DEPLOYMENT REF: <span id="bookingIdValue" class="text-primary">--</span></div>
+                <button class="btn btn-dark w-100 p-3 rounded-4 fw-800" data-bs-dismiss="modal">Close Terminal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="workerNegotiationModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 p-4" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
+            <div class="modal-header border-0 pb-0">
+                <h3 class="fw-800">Negotiation Terminal</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted small fw-700 mb-4 text-uppercase" style="letter-spacing: 1px;">Define Service Budget Range</p>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label class="fw-800 small text-muted mb-2">MIN PRICE (₹)</label>
+                        <input type="number" id="minPriceInput" class="form-control form-control-lg fw-800 text-center" placeholder="00" style="border-radius: 20px; height: 70px; font-size: 1.4rem; border: 2px solid #f1f5f9; background: #f8fafc;">
+                    </div>
+                    <div class="col-6">
+                        <label class="fw-800 small text-muted mb-2">MAX PRICE (₹)</label>
+                        <input type="number" id="maxPriceInput" class="form-control form-control-lg fw-800 text-center" placeholder="00" style="border-radius: 20px; height: 70px; font-size: 1.4rem; border: 2px solid #f1f5f9; background: #f8fafc;">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-primary w-100 py-3 rounded-4 fw-800 shadow-sm" onclick="processNegotiation()">
+                        <i class="fas fa-paper-plane me-2"></i> SEND TO CUSTOMER
+                    </button>
+                </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-link text-muted fw-700 text-decoration-none small" data-bs-dismiss="modal">DISCARD</button>
                 </div>
             </div>
-            <div class="d-none d-lg-block">
-                <p class="stat-label m-0">Service</p>
-                <h6 class="fw-800 m-0">Electrician</h6>
-            </div>
-
-            <div class="text-end d-flex flex-column gap-2" style="min-width: 180px;">
-        <button class="btn btn-outline-primary rounded-pill fw-800 py-2" data-bs-toggle="modal" data-bs-target="#workerNegotiationModal">
-            <i class="fas fa-handshake me-2"></i>Negotiate
-        </button>
-        <button class="btn-action-glow py-2" onclick="generateOTP('1023')">
-            Mark Arrived
-        </button>
         </div>
     </div>
-  </div>
+</div>
 
-  <div class="modal fade" id="otpModal" tabindex="-1">
+<div class="modal fade" id="customerOfferModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content shadow-lg">
-        <div class="modal-body p-4 text-center">
-            <div class="mb-4"><i class="fas fa-shield-check fa-4x text-success opacity-50"></i></div>
-            <h2 class="fw-800 mb-2">Deploy OTP</h2>
-            <p class="text-muted mb-4">Provide this secure code to the client to initialize the service session.</p>
-            <div class="otp-box-luxe mb-4" id="otpValue">000000</div>
-            <div class="small fw-800 text-muted mb-4">DEPLOYMENT REF: <span id="bookingIdValue" class="text-primary">--</span></div>
-            <button class="btn btn-dark w-100 p-3 rounded-4 fw-800" data-bs-dismiss="modal">Close Terminal</button>
+        <div class="modal-content border-0 p-4" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
+            <div class="modal-header border-0 pb-0">
+                <h3 class="fw-800">Customer's Offer</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="text-muted small fw-700 mb-2 text-uppercase">Customer wants to pay</p>
+                <div class="p-4 mb-4 rounded-4" style="background: #fff7ed; border: 2px solid #fdba74;">
+                    <h1 class="fw-900 text-warning mb-0" style="font-size: 3.5rem;">₹<span id="customerPriceDisplay">600</span></h1>
+                </div>
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button class="btn btn-outline-danger w-100 py-3 rounded-4 fw-800" data-bs-dismiss="modal" onclick="alert('Offer Rejected')">REJECT</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-success w-100 py-3 rounded-4 fw-800" data-bs-dismiss="modal" onclick="alert('Amount Charged Successfully!')">CHARGE</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="modal fade" id="workerNegotiationModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 p-4" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
-      <div class="modal-header border-0 pb-0">
-        <h3 class="fw-800">Bid Terminal</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <div class="p-3 mb-4 rounded-4 text-center" style="background: #f8fafc; border: 2px dashed #e2e8f0;">
-            <p class="small fw-800 text-muted mb-1 text-uppercase">Customer's Counter Offer</p>
-            <h2 class="fw-900 text-primary mb-0">₹480</h2>
-        </div>
-        <div class="mb-4">
-            <label class="fw-800 small text-muted mb-2">SEND YOUR COUNTER (₹)</label>
-            <input type="number" class="form-control form-control-lg fw-800 text-center" placeholder="550" style="border-radius: 20px; height: 70px; font-size: 1.5rem; border: 2px solid #e2e8f0;">
-        </div>
-        <div class="row g-2">
-            <div class="col-6">
-                <button class="btn btn-primary w-100 py-3 rounded-4 fw-800" onclick="alert('Counter-bid sent to customer!')">SEND BID</button>
-            </div>
-            <div class="col-6">
-                <button class="btn btn-success w-100 py-3 rounded-4 fw-800" onclick="alert('Handshake Successful! Price locked at ₹480')">ACCEPT</button>
-            </div>
+</div>
+
+<script>
+// Original Negotiation Logic
+function processNegotiation() {
+    const minVal = document.getElementById('minPriceInput').value;
+    const maxVal = document.getElementById('maxPriceInput').value;
+    if (!minVal || !maxVal) {
+        alert("Please enter both minimum and maximum values.");
+        return;
+    }
+    if (parseFloat(minVal) > parseFloat(maxVal)) {
+        alert("Minimum price cannot exceed maximum price.");
+        return;
+    }
+    alert("Service quote of ₹" + minVal + " - ₹" + maxVal + " has been sent to the soham.");
+    const modalElement = document.getElementById('workerNegotiationModal');
+    const modalInstance = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modalInstance.hide();
+}
+
+// Original OTP Logic
+let bookingOtps = {};
+function generateOTP(bookingId) {
+    if (!bookingOtps[bookingId]) {
+        bookingOtps[bookingId] = Math.floor(100000 + Math.random() * 900000);
+    }
+    document.getElementById("otpValue").textContent = bookingOtps[bookingId];
+    document.getElementById("bookingIdValue").textContent = bookingId;
+    const modal = new bootstrap.Modal(document.getElementById('otpModal'));
+    modal.show();
+}
+</script>
         </div>
       </div>
     </div>
@@ -312,17 +361,6 @@
             statusIndicator.style.boxShadow = "none";
         }
     });
-
-    // OTP Logic
-    let bookingOtps = {};
-    function generateOTP(bookingId) {
-      if (!bookingOtps[bookingId]) {
-        bookingOtps[bookingId] = Math.floor(100000 + Math.random() * 900000);
-      }
-      document.getElementById("otpValue").textContent = bookingOtps[bookingId];
-      document.getElementById("bookingIdValue").textContent = bookingId;
-      new bootstrap.Modal(document.getElementById('otpModal')).show();
-    }
   </script>
 
 </body>

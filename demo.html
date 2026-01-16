@@ -1,186 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>QuickFix | Elite Partner Fleet</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickFix | Elite Dashboard</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    /* --- Pehle wala saara CSS wahi hai --- */
-    :root { --brand: #1d4ed8; --brand-soft: #eff6ff; --body-bg: #f8fafc; --text-main: #0f172a; --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.04); }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--body-bg); color: var(--text-main); margin: 0; }
-    .hero-nav { background: linear-gradient(135deg, var(--brand), #1e40af); padding: 60px 0 120px; color: white; text-align: center; position: relative; }
-    .navbar-simple { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; position: absolute; top: 0; width: 100%; }
-    .back-link { color: white; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 12px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: 0.3s; }
-    .hero-title { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
-    .hero-sub { opacity: 0.8; font-weight: 500; font-size: 1.1rem; }
-    .filter-wrapper { margin-top: -60px; position: relative; z-index: 10; }
-    .filter-box { background: white; padding: 30px 40px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.06); border: 1px solid rgba(255,255,255,0.8); }
-    .form-label { font-weight: 800; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
-    .form-select { border-radius: 15px; padding: 14px 20px; border: 2px solid #f1f5f9; font-weight: 700; transition: 0.3s; }
-    .card-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding: 50px 0; }
-    .worker-card { background: #ffffff; border-radius: 32px; padding: 35px; box-shadow: var(--card-shadow); transition: all 0.5s; border: 1px solid #f1f5f9; position: relative; }
-    .worker-card:hover { transform: translateY(-12px); border-color: var(--brand); }
-    .badge-status { position: absolute; top: 35px; right: 35px; background: #dcfce7 !important; color: #16a34a !important; font-weight: 800; padding: 6px 14px; border-radius: 100px; font-size: 10px; }
-    .worker-title { font-weight: 800; font-size: 1.4rem; margin-bottom: 20px; }
-    .worker-info p { margin-bottom: 12px; font-weight: 600; color: #64748b; display: flex; align-items: center; gap: 12px; }
-    .worker-info i { color: var(--brand); }
-    .assign-btn { background: var(--brand); color: white; padding: 16px; font-weight: 800; border-radius: 18px; width: 100%; border: none; margin-top: 20px; transition: 0.4s; }
+<style>
+  :root {
+    --brand: #1d4ed8;
+    --brand-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    --bg-light: #f8fafc;
+    --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
 
-    /* --- 🆕 Modal & Table Styling --- */
-    .modal-content { border-radius: 35px; border: none; overflow: hidden; }
-    .modal-header { background: var(--brand); color: white; padding: 25px 40px; }
-    .modal-title { font-weight: 800; letter-spacing: -1px; }
-    .customer-table { margin-top: 20px; }
-    .customer-table thead { background: #f8fafc; }
-    .customer-table th { font-weight: 800; color: #94a3b8; font-size: 12px; text-transform: uppercase; border: none; padding: 15px; }
-    .customer-table td { font-weight: 700; color: var(--text-main); vertical-align: middle; padding: 15px; border-bottom: 1px solid #f1f5f9; }
-    .btn-action { padding: 8px 16px; border-radius: 12px; font-weight: 800; font-size: 12px; border: none; transition: 0.2s; }
-    .btn-confirm { background: #dcfce7; color: #16a34a; }
-    .btn-confirm:hover { background: #16a34a; color: white; }
-    .btn-reject { background: #fee2e2; color: #dc2626; }
-    .btn-reject:hover { background: #dc2626; color: white; }
-  </style>
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-light); color: #0f172a; display: flex; min-height: 100vh; }
+
+  /* Sidebar Navigation */
+  .sidebar { width: 280px; background: var(--brand-gradient); color: white; padding: 40px 20px; position: fixed; height: 100vh; z-index: 1001; }
+  .nav-item-elite { padding: 15px 20px; border-radius: 15px; color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 15px; margin-bottom: 10px; transition: 0.3s; font-weight: 600; }
+  .nav-item-elite:hover, .nav-item-elite.active { background: rgba(255,255,255,0.1); color: white; }
+
+  /* Main Content */
+  .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 40px 60px; }
+  .header-premium h1 { font-weight: 800; letter-spacing: -2px; font-size: 2.8rem; }
+
+  /* Status Tracker */
+  .status-tracker { display: flex; justify-content: space-between; position: relative; margin-bottom: 40px; }
+  .status-step { flex: 1; text-align: center; position: relative; font-weight: 700; font-size: 0.8rem; color: #cbd5e1; }
+  .status-step.active { color: var(--brand); }
+  .status-step::before { content: ''; width: 20px; height: 20px; background: #e2e8f0; border-radius: 50%; display: block; margin: 0 auto 10px; position: relative; z-index: 2; }
+  .status-step.active::before { background: var(--brand); box-shadow: 0 0 15px rgba(29, 78, 216, 0.5); }
+
+  /* Luxury Cards */
+  .glass-card { background: white; border-radius: 35px; padding: 40px; border: 1px solid #f1f5f9; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.04); }
+  .detail-box { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; padding: 15px; background: #f8fafc; border-radius: 20px; }
+  .icon-square { width: 50px; height: 50px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--brand); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+  /* Payment Selection */
+  .pay-option { border: 2px solid #f1f5f9; border-radius: 20px; padding: 15px; cursor: pointer; transition: 0.3s; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+  .pay-option:hover { border-color: var(--brand); background: #eff6ff; }
+  .pay-option.selected { border-color: var(--brand); background: #eff6ff; }
+
+  /* REDIRECTION SUCCESS OVERLAY */
+  #success-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.9);
+    z-index: 10000;
+    backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+  }
+  .success-card {
+    background: white;
+    padding: 50px;
+    border-radius: 40px;
+    text-align: center;
+    max-width: 450px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* Map and Professional Cards */
+  .map-box { background: #f1f5f9; border-radius: 30px; height: 350px; position: relative; overflow: hidden; border: 1px solid #e2e8f0; margin-top: 25px; }
+  .expert-card { text-align: center; background: white; border-radius: 35px; padding: 40px; border: 1px solid #f1f5f9; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.04); }
+  .expert-avatar { width: 120px; height: 120px; border-radius: 35px; margin: 0 auto 25px; background: #f1f5f9 url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') center/cover; border: 4px solid white; }
+
+  .btn-verify-elite { background: var(--brand); color: white; border-radius: 100px; padding: 15px 40px; font-weight: 800; border: none; transition: 0.4s; width: 100%; }
+  .btn-bill-luxe { background: var(--success-gradient); color: white; border-radius: 100px; padding: 12px 30px; font-weight: 700; border: none; width: 100%; }
+  .btn-neg-luxe { background: var(--gold-gradient); color: white; border-radius: 100px; padding: 12px 30px; font-weight: 700; border: none; width: 100%; margin-bottom: 10px; }
+
+  @media (max-width: 991px) { .sidebar { display: none; } .main-content { margin-left: 0; width: 100%; padding: 20px; } }
+</style>
 </head>
 <body>
 
-  <div class="hero-nav">
-    <nav class="navbar-simple">
-      <a class="back-link" href="admin-dashboard.html"><i class="fas fa-chevron-left me-2"></i> Dashboard</a>
-      <span class="fw-800 fs-5"><i class="fa-solid fa-screwdriver-wrench me-2"></i>QuickFix Admin</span>
-    </nav>
-    <div class="container">
-      <h1 class="hero-title">Active Partner Fleet</h1>
-      <p class="hero-sub">Assign live service requests to verified workers</p>
+<div class="sidebar">
+  <h2 class="fw-800 mb-5"><i class="fas fa-screwdriver-wrench text-primary me-2"></i>QuickFix.</h2>
+  <nav>
+    <a href="customer-home.html" class="nav-item-elite active"><i class="fas fa-home"></i> Home </a>
+    <a href="booking-history.html" class="nav-item-elite"><i class="fas fa-history"></i> History</a>
+    <a href="assign-worker-profile.html" class="nav-item-elite"><i class="fas fa-user"></i> Member Profile</a>
+  </nav>
+</div>
+
+<div class="main-content">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div class="header-premium">
+      <p class="text-muted fw-700 small mb-1">MEMBER ACCESS TERMINAL</p>
+      <h1>Welcome, <span id="customer-name" class="text-primary">Loading...</span></h1>
     </div>
+    <button class="btn btn-dark rounded-pill px-4 fw-800 shadow-sm" onclick="runDemoSimulation()">
+        <i class="fas fa-play-circle me-2"></i> Run Demo Mode
+    </button>
   </div>
 
-  <div class="container filter-wrapper">
-    <div class="filter-box">
-      <div class="row g-4">
-        <div class="col-md-6">
-          <label class="form-label">Specialization</label>
-          <select id="serviceSelect" class="form-select"><option value="">— Show All —</option></select>
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="glass-card mb-4">
+        <h5 class="fw-800 mb-4">Service Deployment Status</h5>
+        <div class="status-tracker">
+            <div class="status-step active" id="step-pending">Request Logged</div>
+            <div class="status-step" id="step-accepted">Expert Dispatched</div>
+            <div class="status-step" id="step-arrived">Job Active</div>
         </div>
-        <div class="col-md-6">
-          <label class="form-label">Operations City</label>
-          <select id="citySelect" class="form-select"><option value="">— Show All —</option></select>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="icon-square"><i class="fas fa-hashtag"></i></div>
+                    <div><p class="small text-muted mb-0">ORDER ID</p><strong id="booking-id">--</strong></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="icon-square"><i class="fas fa-tools"></i></div>
+                    <div><p class="small text-muted mb-0">SERVICE VERTICAL</p><strong id="service-request">--</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-box" id="mapSection" style="display: none;">
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center text-muted">
+                <i class="fas fa-map-marked-alt fa-3x opacity-25"></i>
+                <span class="ms-3 fw-700">Live Expert Tracking Active</span>
+            </div>
         </div>
       </div>
     </div>
 
-    <div class="card-list" id="workerCards"></div>
-  </div>
+    <div class="col-lg-4">
+      <div class="expert-card">
+        <div class="expert-avatar"></div>
+        <h4 id="worker-name" class="fw-800 mb-1">Awaiting Assignment</h4>
+        <p id="worker-role" class="text-muted small fw-600 mb-4">VERIFIED PROFESSIONAL</p>
+        
+        <button id="neg-btn" class="btn-neg-luxe" data-bs-toggle="modal" data-bs-target="#negModal" disabled>
+          <i class="fas fa-handshake me-2"></i> NEGOTIATION
+        </button>
 
-  <div class="modal fade" id="assignModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="fas fa-tasks me-2"></i> Assign Pending Requests</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div class="alert alert-primary rounded-4 border-0 mb-4">
-            <i class="fas fa-info-circle me-2"></i> Currently viewing active requests for <strong><span id="targetWorkerName"></span></strong> (ID: <span id="targetWorkerId"></span>)
-          </div>
-          <div class="table-responsive">
-            <table class="table customer-table">
-              <thead>
-                <tr>
-                  <th>Customer</th>
-                  <th>Contact</th>
-                  <th>Service Required</th>
-                  <th>Location</th>
-                  <th>Schedule</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="requestTableBody">
-                </tbody>
-            </table>
-          </div>
-        </div>
+        <button id="bill-btn" class="btn-bill-luxe" data-bs-toggle="modal" data-bs-target="#billModal" style="display: none;">
+          <i class="fas fa-file-invoice-dollar me-2"></i> VIEW FINAL BILL
+        </button>
+
+        <button id="verify-btn" class="btn-verify-elite mt-2" data-bs-toggle="modal" data-bs-target="#otpModal" disabled>
+            VERIFY OTP
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const workers = [
-      {id:201, name:'Gaurav Kamble',   service:'Plumber',    city:'Pune',     active:true},
-      {id:203, name:'Swanand Raut',    service:'Electrician',city:'Aurangabad',active:true},
-      {id:207, name:'Soham Gitte',     service:'Electrician',city:'Thane',    active:true},
-      {id:209, name:'Mehul Jadhav',    service:'Plumber',    city:'Parbhani', active:true},
-    ];
+<div id="success-overlay">
+  <div class="success-card shadow-lg">
+    <div style="width: 80px; height: 80px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+      <i class="fas fa-check text-success fa-2x"></i>
+    </div>
+    <h2 class="fw-800">Payment Successful!</h2>
+    <p class="text-muted">Your transaction has been processed. We are redirecting you back to the home screen.</p>
+    <div class="spinner-border text-primary mt-3" role="status"></div>
+  </div>
+</div>
 
-    const pendingRequests = [
-      {id: 'REQ001', name: 'Rahul Deshmukh', phone: '+91 98XXX XXX01', service: 'Plumber', address: 'Baner, Pune', time: '10:00 AM'},
-      {id: 'REQ002', name: 'Soham Gitte', phone: '+91 88XXX XXX22', service: 'Electrician', address: 'Thane West', time: '11:30 AM'},
-      {id: 'REQ003', name: 'Swanand Raut', phone: '+91 77XXX XXX33', service: 'Electrician', address: 'Station Road', time: '02:00 PM'},
-      {id: 'REQ004', name: 'Pooja Patil', phone: '+91 95XXX XXX44', service: 'Cleaner', address: 'Nashik Central', time: '09:00 AM'},
-      {id: 'REQ005', name: 'Amit Sharma', phone: '+91 82XXX XXX55', service: 'Painter', address: 'Salt Lake, Kolkata', time: '12:00 PM'}
-    ];
+<div class="modal fade" id="billModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-4" style="border-radius: 40px;">
+      <div class="modal-header border-0 pb-0">
+        <h3 class="fw-800">Final Invoice</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="p-4 mb-4" style="background: #f0fdf4; border-radius: 30px; border: 2px dashed #bbf7d0;">
+            <p class="text-muted small fw-800 mb-1">AMOUNT TO PAY</p>
+            <h1 class="display-4 fw-900 text-success mb-0">₹<span id="final-bill-amount">0</span></h1>
+        </div>
 
-    const workerCardsContainer = document.getElementById('workerCards');
-
-    function renderWorkers() {
-      workerCardsContainer.innerHTML = '';
-      workers.forEach(w => {
-        const card = document.createElement('div');
-        card.className = 'worker-card';
-        card.innerHTML = `
-          <span class="badge badge-status">Online Now</span>
-          <h5 class="worker-title">${w.name}</h5>
-          <div class="worker-info">
-            <p><i class="fas fa-id-card-clip"></i> ID: ${w.id}</p>
-            <p><i class="fas fa-screwdriver-wrench"></i> Skill: ${w.service}</p>
-            <p><i class="fas fa-location-dot"></i> ${w.city}</p>
+        <h6 class="fw-800 text-muted mb-3">SELECT PAYMENT METHOD</h6>
+        
+        <div class="pay-option" id="upi-opt" onclick="selectPayment('upi', this)">
+          <div class="icon-square"><i class="fas fa-mobile-screen-button"></i></div>
+          <div class="text-start">
+            <strong class="d-block">UPI Payment</strong>
+            <small class="text-muted">GPay, PhonePe, Paytm</small>
           </div>
-          <button class="assign-btn" onclick="openAssignModal(${w.id}, '${w.name}')">
-            <i class="fas fa-user-check me-2"></i> Assign To Job
-          </button>
-        `;
-        workerCardsContainer.appendChild(card);
-      });
-    }
+          <i class="fas fa-check-circle ms-auto text-primary d-none"></i>
+        </div>
 
-    function openAssignModal(id, name) {
-      document.getElementById('targetWorkerId').innerText = id;
-      document.getElementById('targetWorkerName').innerText = name;
-      
-      const tbody = document.getElementById('requestTableBody');
-      tbody.innerHTML = '';
+        <div class="pay-option" id="cash-opt" onclick="selectPayment('cash', this)">
+          <div class="icon-square"><i class="fas fa-money-bill-1"></i></div>
+          <div class="text-start">
+            <strong class="d-block">Cash on Delivery</strong>
+            <small class="text-muted">Pay directly to expert</small>
+          </div>
+          <i class="fas fa-check-circle ms-auto text-primary d-none"></i>
+        </div>
 
-      pendingRequests.forEach(req => {
-        const row = `
-          <tr>
-            <td><strong>${req.name}</strong><br><small class="text-muted">ID: ${req.id}</small></td>
-            <td>${req.phone}</td>
-            <td><span class="badge bg-primary-subtle text-primary rounded-pill px-3">${req.service}</span></td>
-            <td>${req.address}</td>
-            <td>Today, ${req.time}</td>
-            <td>
-              <button class="btn-action btn-confirm me-2" onclick="finalize('${req.name}', '${name}')">Assign</button>
-              <button class="btn-action btn-reject" onclick="this.closest('tr').remove()">Reject</button>
-            </td>
-          </tr>
-        `;
-        tbody.insertAdjacentHTML('beforeend', row);
-      });
+        <button class="btn btn-dark w-100 rounded-pill py-3 fw-800 shadow-lg mt-3" onclick="processPayment()">
+          COMPLETE PAYMENT
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-      new bootstrap.Modal(document.getElementById('assignModal')).show();
-    }
+<div class="modal fade" id="negModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-4" style="border-radius: 40px;">
+      <div class="modal-header border-0 pb-0"><h3 class="fw-800">Negotiation</h3><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body text-center">
+        <div class="p-4 mb-3" style="background: #fffbeb; border-radius: 25px;">
+          <h2 class="text-warning fw-800 mb-0">₹<span id="price-range">800 - 1200</span></h2>
+        </div>
+        <input type="number" id="counter-offer" class="form-control form-control-lg text-center rounded-pill mb-3" placeholder="₹ Enter Amount">
+        <button class="btn-verify-elite" onclick="submitCounterOffer()">SEND OFFER</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    function finalize(cust, worker) {
-      alert(`Handshake Initialized! ${worker} has been assigned to ${cust}.`);
-      bootstrap.Modal.getInstance(document.getElementById('assignModal')).hide();
-    }
+<div class="modal fade" id="otpModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 p-4" style="border-radius: 40px;">
+      <div class="modal-header border-0 pb-0"><h3 class="fw-800">Check-in</h3><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+      <div class="modal-body text-center">
+        <p>Code: <strong>123456</strong></p>
+        <input type="text" id="customer-otp" class="form-control form-control-lg text-center fw-800 mb-4" placeholder="000000" maxlength="6">
+        <div id="otp-status"></div>
+        <button class="btn-verify-elite" onclick="verifyOTP()">VERIFY</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    renderWorkers();
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+let selectedMethod = null;
+
+function runDemoSimulation() {
+    document.querySelector("#customer-name").textContent = "Demo Member";
+    document.querySelector("#booking-id").textContent = "BK-DEMO-99";
+    document.querySelector("#service-request").textContent = "Premium Electrician";
+    document.getElementById('step-accepted').classList.add('active');
+    document.getElementById('mapSection').style.display = 'block';
+    document.querySelector("#worker-name").textContent = "Rahul Sharma (Elite)";
+    document.getElementById("verify-btn").disabled = false;
+    document.getElementById("neg-btn").disabled = false;
+    window.currentOtp = "123456";
+}
+
+function selectPayment(method, element) {
+    selectedMethod = method;
+    document.querySelectorAll('.pay-option').forEach(el => {
+        el.classList.remove('selected');
+        el.querySelector('.fa-check-circle').classList.add('d-none');
+    });
+    element.classList.add('selected');
+    element.querySelector('.fa-check-circle').classList.remove('d-none');
+}
+
+function processPayment() {
+    if(!selectedMethod) return alert("Please select a payment method.");
+    
+    // 1. Hide the bill modal
+    const billModal = bootstrap.Modal.getInstance(document.getElementById('billModal'));
+    billModal.hide();
+
+    // 2. Show the custom success card overlay
+    document.getElementById('success-overlay').style.display = 'flex';
+    
+    // 3. Redirect after 3 seconds
+    setTimeout(() => {
+        window.location.href = "customer-home.html";
+    }, 3000);
+}
+
+function submitCounterOffer() {
+    const offer = document.getElementById('counter-offer').value;
+    if(!offer) return;
+    bootstrap.Modal.getInstance(document.getElementById('negModal')).hide();
+    setTimeout(() => {
+        document.getElementById('neg-btn').style.display = 'none';
+        document.getElementById('bill-btn').style.display = 'block';
+        document.getElementById('final-bill-amount').textContent = offer;
+    }, 1500);
+}
+
+function verifyOTP() {
+  const enteredOtp = document.getElementById("customer-otp").value.trim();
+  if (enteredOtp === "123456") {
+    document.getElementById('step-arrived').classList.add('active');
+    bootstrap.Modal.getInstance(document.getElementById("otpModal")).hide();
+  }
+}
+</script>
+
 </body>
 </html>

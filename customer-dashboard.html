@@ -71,10 +71,10 @@
   <div class="d-flex justify-content-between align-items-center mb-5">
     <div class="header-premium">
       <p class="text-muted fw-700 small mb-1">MEMBER ACCESS TERMINAL</p>
-      <h1>Welcome, <span id="customer-name" class="text-primary">Loading...</span></h1>
+      <h1>Welcome, <span id="customer-name" class="text-primary">Soham Gitte</span></h1>
     </div>
     <button class="btn btn-dark rounded-pill px-4 fw-800 shadow-sm" onclick="runDemoSimulation()">
-        <i class="fas fa-play-circle me-2"></i> Run Demo Mode
+        <i class="fas fa-play-circle me-2"></i> Refresh
     </button>
   </div>
 
@@ -159,25 +159,63 @@
 <div class="modal fade" id="priceNegotiationModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 p-4" style="border-radius: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.2);">
+      
       <div class="modal-header border-0 pb-0">
-        <h3 class="fw-800">Elite Negotiation</h3>
+        <h3 class="fw-800">Service Price</h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
+
       <div class="modal-body">
         <div class="p-3 mb-4 rounded-4 text-center" style="background: #eff6ff; border: 2px dashed #1d4ed8;">
             <p class="small fw-800 text-muted mb-1 text-uppercase">Worker's Estimate Range</p>
             <h2 class="fw-900 text-primary mb-0">₹500 - ₹550</h2>
         </div>
+
         <div class="mb-4">
-            <label class="fw-800 small text-muted mb-2">YOUR COUNTER OFFER (₹)</label>
-            <input type="number" id="customer-bid" class="form-control form-control-lg fw-800 text-center" placeholder="Enter amount" style="border-radius: 20px; background: #f8fafc; border: 2px solid #e2e8f0; height: 70px; font-size: 1.5rem;">
+            <label class="fw-800 small text-muted mb-2 text-uppercase">Enter Amount (₹)</label>
+            <input type="number" id="final-price-input" class="form-control form-control-lg fw-800 text-center" 
+                   placeholder="e.g. 520" 
+                   style="border-radius: 20px; background: #f8fafc; border: 2px solid #e2e8f0; height: 70px; font-size: 1.5rem;">
         </div>
+
         <div class="row g-2">
-            <div class="col-6"><button class="btn btn-dark w-100 py-3 rounded-4 fw-800" data-bs-dismiss="modal">REJECT</button></div>
-            <div class="col-6"><button class="btn btn-primary w-100 py-3 rounded-4 fw-800" onclick="confirmBid()">CONFIRM BID</button></div>
+            <div class="col-12">
+                <button class="btn btn-primary w-100 py-3 rounded-4 fw-800 shadow-sm" onclick="sendToWorker()">
+                    SEND TO WORKER
+                </button>
+            </div>
+            <div class="col-12 text-center mt-2">
+                <button class="btn btn-link text-muted fw-700 text-decoration-none small" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<script>
+function sendToWorker() {
+    const enteredAmount = document.getElementById('final-price-input').value;
+
+    if (!enteredAmount) {
+        alert("Please enter an amount before sending.");
+        return;
+    }
+
+    // Success logic
+    console.log("Price sent to worker:", enteredAmount);
+    alert("Request for ₹" + enteredAmount + " has been sent to the service partner.");
+    
+    // Auto-close modal
+    const modalElement = document.getElementById('priceNegotiationModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+        modalInstance.hide();
+    }
+}
+</script>
   </div>
 </div>
 
@@ -185,8 +223,8 @@
 <script>
 // 🔥 NEW: DEMO SIMULATION LOGIC
 function runDemoSimulation() {
-    document.querySelector("#customer-name").textContent = "Demo Member";
-    document.querySelector("#booking-id").textContent = "QF-DEMO-99";
+    document.querySelector("#customer-name").textContent = "Soham Gitte";
+    document.querySelector("#booking-id").textContent = "-99";
     document.querySelector("#service-request").textContent = "Plumber";
     
     // Status aur Map activate karo
